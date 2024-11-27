@@ -3,6 +3,7 @@ import validator from "validator"
 import bcrypt from "bcrypt"
 import {v2 as cloudinary} from "cloudinary"
 import trainerModel from "../models/trainerModel.js";
+import classModel from "../models/classModel.js";
 
 
 
@@ -93,4 +94,33 @@ const allTrainers = async(req,res)=> {
   }
 }
 
-export  {loginAdmin, addTrainer, allTrainers}
+const addClass = async(req, res)=> {
+
+  try {
+
+    const {date, timing, className, trainerName} = req.body;
+
+    if(!date || !timing || !className || !trainerName) {
+      return res.json({success: false, message: " Missing details"})
+    }
+
+    const classData = {
+      date,
+      timing,
+      className,
+      trainerName
+    }
+
+    const newClass = new classModel(classData)
+    await newClass.save()
+
+    res.json({success:true, message:"Class Added"})
+     
+  } catch (error) {
+    console.log(error)
+     res.json({success:false, message:error.message})
+    
+  }
+}
+
+export  {loginAdmin, addTrainer, allTrainers, addClass}
