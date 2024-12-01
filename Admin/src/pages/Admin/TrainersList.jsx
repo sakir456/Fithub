@@ -1,15 +1,11 @@
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import { AdminContext } from "../../context/AdminContext"
 
 
 const TrainersList = () => {
- const {trainers, setTrainers,getAllTrainers,aToken} = useContext(AdminContext)
+ const {trainers} = useContext(AdminContext)
 
- useEffect(()=> {
-  if(aToken){
-    getAllTrainers()
-  }
- },[aToken])
+
 
   return (
     <div className="m-5 max-h-[90vh] overflow-y-scroll">

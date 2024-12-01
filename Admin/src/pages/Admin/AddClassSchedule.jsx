@@ -1,37 +1,71 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import { AdminContext } from "../../context/AdminContext"
+import { toast } from "react-toastify"
+import axios from "axios"
 
 
 const AddClassSchedule = () => {
+  const {trainers, backendUrl, aToken} = useContext(AdminContext)
+
   const [dates, setDates] = useState([])
   const [date,setDate] = useState("Select Date")
   const [timing, setTiming] = useState("7:00-8:00")
   const [className, setClassName] = useState("Weight Lifting")
-  const [trainerName, setTrainerName] = useState("James Martinez")
+  const [trainerName, setTrainerName] = useState("Select Trainer")
   
   
-  const onSubmitHandler = async()=> {
-    
+  
+  const onSubmitHandler = async(e)=> {
+    e.preventDefault()
+
+    if(date === "Select Date" || trainerName === "Select Trainer" ) {
+      return toast.warn("Please select all fields")
+    }
+
+    try {
+
+      const dateObj = new Date(date)
+      const newDate = dateObj.toISOString().split("T")[0];
+
+      const {data} = await axios.post(backendUrl + "/api/admin/add-class", {date:newDate, timing,className,trainerName}, {headers:{aToken}})
+      if(data.success){
+        toast.success(data.message)
+        setDate("Select Date")
+        setTiming("7:00-8:00")
+        setClassName("Weight Lifting")
+        setTrainerName("Select Trainer")
+       } else {
+        toast.error(data.message)
+       }
+   } catch (error) {
+      toast.error(error.message)
+      console.log(error)
+    }
+
   }
 
 
   function calculateDates(){
        let dateArr = []
       let today = new Date()
-     
-      
-    for(let i=0; i<7; i++ ){
-      let newDate = new Date(today)
+     let newDate;
+     for(let i=0; i<7; i++ ){
+      newDate = new Date(today)
+      console.log(newDate)
     newDate.setDate(today.getDate()+i)
-   dateArr.push(newDate)
+    dateArr.push(newDate)
     }
+    console.log(dateArr)
    setDates([...dateArr])
    
  }
 
+ console.log(date)
+
  useEffect(() => {
   calculateDates();
 }, []);
-
+ 
  
 
 
@@ -44,7 +78,7 @@ const AddClassSchedule = () => {
       <div className=" flex-1 flex flex-col gap-1 " >
       <p>Date</p>
          <select value={date} onChange={(e) => setDate(e.target.value)}  className="px-3 py-2 border rounded">
-         <option value="Select Date" disabled selected> -- Select Date --</option>
+         <option value="Select Date" > -- Select Date --</option>
           {
             dates.map((item,index)=> (
               
@@ -81,12 +115,12 @@ const AddClassSchedule = () => {
         <div className=" flex-1 flex flex-col gap-1 ">
         <p>Trainer Name</p>
         <select value={trainerName} onChange={(e) => setTrainerName(e.target.value)} className="px-3 py-2 border rounded">
-          <option value="James Martinez">James Martinez</option>
-          <option value="Anthony Clark">Anthony Clark</option>
-          <option value="Chris White">Chris White</option>
-          <option value="Sophia Johnson">Sophia Johnson</option>
-          <option value="Noah Harris">Noah Harris</option>
-          <option value="John Doe">John Doe</option>
+        <option value="Select Trainer" > -- Select Trainer --</option>
+        {
+          trainers.map((item,index)=> (
+            <option key={index} value={item.name}>{item.name}</option>
+          ))
+        }
         </select>
         </div>
 

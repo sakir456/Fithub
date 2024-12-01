@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -32,6 +32,12 @@ const AdminContextProvider = (props) => {
         trainers, setTrainers,
         getAllTrainers
     }
+
+    useEffect(()=> {
+        if(aToken){
+          getAllTrainers()
+        }
+       },[aToken])
 
     return (
         <AdminContext.Provider value={value}>
