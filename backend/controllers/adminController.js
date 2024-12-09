@@ -98,7 +98,7 @@ const addClass = async(req, res)=> {
 
   try {
 
-    const {date, timing, className, trainerName} = req.body;
+    const {date, timing, className, trainerName, trainerId} = req.body;
 
     if(!date || !timing || !className || !trainerName) {
       return res.json({success: false, message: " Missing details"})
@@ -108,7 +108,8 @@ const addClass = async(req, res)=> {
       date,
       timing,
       className,
-      trainerName
+      trainerName,
+      trainerId
     }
 
     const newClass = new classModel(classData)

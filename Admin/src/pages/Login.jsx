@@ -2,6 +2,7 @@ import { useContext, useState } from "react"
 import { AdminContext } from "../context/AdminContext"
 import axios from "axios"
 import { toast } from "react-toastify"
+import { TrainerContext } from "../context/TrainerContext"
 
 
 const Login = () => {
@@ -10,20 +11,29 @@ const Login = () => {
     const [password, setPassword] = useState("")
 
     const {setAToken, backendUrl } = useContext(AdminContext)
+    const { setTToken } = useContext(TrainerContext)
 
 const onSubmitHandler = async(event)=> {
     event.preventDefault()
     try {
-        if(state === "Admin"){
+        if(state === "Admin") {
           const {data} = await axios.post(backendUrl + "/api/admin/login", {email,password})
           if(data.success){
             localStorage.setItem("aToken", data.token)
             setAToken(data.token)
-            console.log(data.token)
+            
           } else {
             toast.error(data.message)
           }
-        } 
+        }  else {
+          const {data} = await axios.post(backendUrl + "/api/trainer/login", {email, password})
+          if(data.success){
+            localStorage.setItem("tToken", data.token)
+            setTToken(data.token)
+            } else{
+              toast.error(data.message)
+            }
+        }
     } catch (error) {
          toast.error(error.message)
     }
@@ -35,14 +45,14 @@ const onSubmitHandler = async(event)=> {
 
   return (
     <div className=" h-screen flex items-center  justify-center   ">
-    <form onSubmit={onSubmitHandler} className="flex flex-col w-[340px] max-sm:w-[290px]  m-auto shadow-lg text-gray-600  text-sm">
+    <form onSubmit={onSubmitHandler} className="flex flex-col w-[380px] max-sm:w-[290px] border rounded-xl  m-auto shadow-lg text-gray-600  text-sm">
     <div className="m-8">
     {state ==="Admin" ?  (
         <p className="m-auto text-2xl font-semibold text-center  "><span className="text-red-600">Admin</span> Login</p>
         ): (
             <p className="m-auto text-2xl font-semibold text-center  "><span className="text-red-600">Trainer</span> Login</p> 
         )
-        }
+        } 
     
     <div className="w-full mt-1" >
         <p className="">Email</p>

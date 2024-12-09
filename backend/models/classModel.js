@@ -17,9 +17,17 @@ const classSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    trainerId: {
+        type:String,
+        required: true,
+    },
     cancelled: {
         type: Boolean,
         default: false
+    },
+    isCompleted: {
+        type: Boolean,
+        default: false 
     }
 })
 

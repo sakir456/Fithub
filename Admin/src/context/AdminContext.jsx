@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext,  useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -17,7 +17,7 @@ const AdminContextProvider = (props) => {
             const {data} = await axios.post(backendUrl  + "/api/admin/all-trainers", {}, {headers:{aToken}})
             if(data.success){
               setTrainers(data.trainers)
-              console.log(data.trainers)
+              
             } else {
                 toast.error(data.message)
             }
@@ -33,12 +33,7 @@ const AdminContextProvider = (props) => {
         getAllTrainers
     }
 
-    useEffect(()=> {
-        if(aToken){
-          getAllTrainers()
-        }
-       },[aToken])
-
+  
     return (
         <AdminContext.Provider value={value}>
          {props.children}

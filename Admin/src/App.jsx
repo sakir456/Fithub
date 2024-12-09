@@ -11,16 +11,21 @@ import TrainersList from './pages/Admin/TrainersList';
 import MembersList from './pages/Admin/MembersList';
 import AddMemberAndTrainer from './pages/Admin/AddMemberAndTrainer';
 import AddClassSchedule from './pages/Admin/AddClassSchedule';
+import TrainerDashboard from './pages/Trainer/TrainerDashboard';
+import { TrainerContext } from './context/TrainerContext';
+import TrainerClasses from './pages/Trainer/TrainerClasses';
+import TrainerProfile from './pages/Trainer/TrainerProfile';
 
 
 function App() {
   const {aToken} = useContext(AdminContext)
+  const {tToken} = useContext(TrainerContext)
   
-  return aToken ? (
+  return aToken || tToken ? (
     <div className='bg-[#F8F9FD]'>
     <ToastContainer/>
     <Navbar/>
-    <div className='flex items-start'>
+    <div className='flex items-start '>
       <Sidebar/>
       {/* admin-routes */}
       <Routes>
@@ -30,6 +35,11 @@ function App() {
         <Route path='/members' element= {<><MembersList/></>} />
         <Route path='/addmemberandtrainer' element= {<><AddMemberAndTrainer/></>} />
         <Route path='/class-schedule' element= {<><AddClassSchedule/></>} />
+        {/* Trainer Routes */}
+        <Route path='/trainer-dashboard' element= {<><TrainerDashboard/></>} />
+        <Route path='/trainer-classes' element= {<><TrainerClasses/></>} />
+        <Route path='/trainer-profile' element= {<><TrainerProfile/></>} />
+
       </Routes>
     </div>
     </div>

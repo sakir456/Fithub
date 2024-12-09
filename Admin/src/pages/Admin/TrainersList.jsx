@@ -1,13 +1,22 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { AdminContext } from "../../context/AdminContext"
 
 
 const TrainersList = () => {
- const {trainers} = useContext(AdminContext)
+ const {trainers, aToken, getAllTrainers} = useContext(AdminContext)
 
 
 
-  return (
+ 
+ useEffect(()=> {
+  if(aToken){
+    getAllTrainers()
+  }
+ },[aToken])
+
+
+
+  return trainers && (
     <div className="m-5 max-h-[90vh] overflow-y-scroll">
       <p className=" font-medium text-lg ">All Trainers</p>
       <div className=" w-full flex flex-wrap gap-4 pt-5 gap-y-6">
