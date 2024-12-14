@@ -22,12 +22,12 @@ const TrainerClasses = () => {
 
 const extractDateandDay = (dateISOString)=> {
   const date = new Date(dateISOString)
-  const hours = date.getDate()
+  const day = date.getDate()
   const months = date.getMonth() + 1 
   const fullYear = date.getFullYear()
-  const day =  daysOfWeek[date.getDay()]
+  const dayOfWeek =  daysOfWeek[date.getDay()]
 
-  return `${hours}/${months}/${fullYear} - ${day} `
+  return `${day}/${months}/${fullYear} - ${dayOfWeek} `
 }
 
 

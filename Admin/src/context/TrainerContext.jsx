@@ -11,6 +11,7 @@ const TrainerContextProvider = (props) => {
         const [tToken, setTToken] = useState(localStorage.getItem("tToken") ? localStorage.getItem("tToken"): "")
         const [profileData, setProfileData] = useState(false)
         const [classes, setClasses] = useState([])
+        const [dashData, setDashData] = useState(false)
 
         const getProfileData = async()=> {
                 try {
@@ -49,6 +50,7 @@ const TrainerContextProvider = (props) => {
                   if(data.success){
                         toast.success(data.message)
                         getClasses()
+                       
                   } else{
                         toast.error(data.message)
                   }
@@ -66,6 +68,7 @@ const TrainerContextProvider = (props) => {
                         if(data.success){
                                 toast.success(data.message)
                                 getClasses()
+                                
                         } else{
                                 toast.error(data.message)
                         }    
@@ -76,6 +79,22 @@ const TrainerContextProvider = (props) => {
                 
         }
 
+        const getDashData  = async()=>{
+              try {
+                const {data} = await axios.get(backendUrl + "/api/trainer/dashboard", {headers:{tToken}})
+                if(data.success){
+                   setDashData(data.dashData)
+                   console.log(data.dashData)
+                } else {
+                  toast.error(data.message)
+                }
+              } catch(error){
+                console.log(error)
+                toast.error(error.message)
+              }
+        }
+        
+
 
         const value = {
                 tToken, setTToken,
@@ -83,7 +102,9 @@ const TrainerContextProvider = (props) => {
                 profileData, setProfileData,
                 getProfileData,
                 classes, setClasses,
-                getClasses, cancelClass ,completeClass
+                getClasses, cancelClass ,completeClass,
+                dashData, setDashData,
+                getDashData
 
         }
 

@@ -105,5 +105,42 @@ const completeClass = async(req, res)=> {
         res.json({success:false, message:error.message})
     }
 }
+
+//API to get dashboard data for trainer panel
+
+const trainerDashboard = async(req,res)=> {
+    try {
+        const {trainerId} = req.body;
+    const classes = await classModel.find({trainerId})
+
+    let isCompleted = 0
+    let cancelled = 0
+
+   classes.map((item)=> {
+    if(item.isCompleted){
+        isCompleted+=1
+    } 
+
+    if(item.cancelled){
+        cancelled+=1
+    }
+   })
+
+   const dashData = {
+    totalClasses:classes.length,
+    isCompleted,
+    cancelled,
+    classes: classes.reverse().slice(0, 5)
+ }
+
+ res.json({success:true, dashData})
+
+    } catch (error) {
+        console.log(error)
+        res.json({success:false, message:error.message})
+    }
+    
+
+}
  
-export {loginTrainer, trainerProfile, updateTrainerProfile, trainerClasses, cancelClass, completeClass}
+export {loginTrainer, trainerProfile, updateTrainerProfile, trainerClasses, cancelClass, completeClass, trainerDashboard}
