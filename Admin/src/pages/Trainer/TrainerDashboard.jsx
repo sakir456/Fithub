@@ -12,9 +12,8 @@ const TrainerDashboard = () => {
        const date = new Date(dateISOString)
        const day = date.getDate()
        const month = monthsofYear[date.getMonth()]
-       const fullYear = date.getFullYear()
-
-       return `${day} ${month} ${fullYear}`
+       
+       return `${day} ${month} `
   }
 
   useEffect(()=> {
@@ -41,7 +40,7 @@ const TrainerDashboard = () => {
         </div>
         </div>
        <div className="flex items-center gap-2 bg-white p-4 min-w-52 rounded border-2 border-gray-100 cursor-pointer text-red-600 hover:scale-105 transition-all">
-        <img className="w-12 " src="/src/assets/hourglass.png" alt="Trainer img"/>
+        <img className="w-12 " src="/src/assets/cross.png" alt="Trainer img"/>
         <div className='flex flex-col justify-center ml-2 text-gray-500 '>
           <p className='text-xl font-semibold text-gray-600'>{dashData.cancelled}</p>
           <p className='text-gray-400'>Cancelled</p>
@@ -50,18 +49,21 @@ const TrainerDashboard = () => {
       </div>
 
       <div className="bg-white mt-10">
-      <div className="flex gap-2 p-4 rounded border-2 border-gray-100 ">
+      <div className="flex items-center gap-2.5 p-4 rounded-t border ">
         <img className="w-7" src="/src/assets/classList.png"/>
         <p className="font-semibold">Upcoming Classes</p>
       </div>
-      <div className="pt-5">
+      <div className="pt-4 border border-t-0">
         {
           dashData.classes.map((item,index)=> (
-            <div key={index} className=" px-10 py-3  hover:bg-gray-300">
-              <div className="flex justify-between items-center">
-              <div>
-                <p className="text-sm font-semibold">{item.className}</p>
-                <p className="text-gray-600 text-sm">{extractDate(item.date)}</p>
+            <div key={index} className=" px-6 py-3  hover:bg-gray-300">
+              <div className="flex gap-3  items-center">
+              <div className="flex-1 text-sm">
+                <p className=" font-medium text-gray-800">{item.className}</p>
+                <div className="flex gap-1">
+                <p className="text-gray-600 ">{extractDate(item.date)}</p>
+                <p className="text-gray-600 ">{item.timing}</p>
+                </div>
               </div>
               {
             item.cancelled ? (

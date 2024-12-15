@@ -6,6 +6,7 @@ import { TrainerContext } from "../../context/TrainerContext"
 const TrainerClasses = () => {
   const {classes, getClasses, tToken,  cancelClass, completeClass} = useContext(TrainerContext)
   const daysOfWeek = ["SUNDAY","MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY"]
+  const monthsofYear = ["Jan","Feb","Mar","Apr","May","June","July","Aug","Sept","Oct","Nov","Dec"]
 
 
   const calculateDuration = (timerange) => {
@@ -23,11 +24,11 @@ const TrainerClasses = () => {
 const extractDateandDay = (dateISOString)=> {
   const date = new Date(dateISOString)
   const day = date.getDate()
-  const months = date.getMonth() + 1 
+  const month = monthsofYear[date.getMonth()]  
   const fullYear = date.getFullYear()
   const dayOfWeek =  daysOfWeek[date.getDay()]
 
-  return `${day}/${months}/${fullYear} - ${dayOfWeek} `
+  return `${day} ${month} ${fullYear} - ${dayOfWeek} `
 }
 
 
