@@ -5,7 +5,16 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+         barlow:['Barlow', 'sans-serif'],
+         teko:['Teko', 'sans-serif']
+      },
+      colors: {
+        primary: '#ff1313', 
+        'primary-hover': '#c20505',
+      },
+    },
   },
   plugins: [],
 }
