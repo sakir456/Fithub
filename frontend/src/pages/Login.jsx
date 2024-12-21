@@ -2,9 +2,9 @@
 
 const Login = () => {
   return (
-    <form className="min-h-[80vh] flex items-center">
+    <form className="">
         <div>
-           
+          Login 
         </div>
     </form>
   )
