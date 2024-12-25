@@ -45,7 +45,7 @@ const onSubmitHandler = async(event)=> {
 
   return (
     <div className=" h-screen flex items-center  justify-center   ">
-    <form onSubmit={onSubmitHandler} className="flex flex-col w-[380px] max-sm:w-[290px] border rounded-xl  m-auto shadow-lg text-gray-600  text-sm">
+    <form onSubmit={onSubmitHandler} className="flex flex-col min-w-[340px] sm:min-w-96 border rounded-xl  m-auto shadow-lg text-gray-600  text-sm">
     <div className="m-8">
     {state ==="Admin" ?  (
         <p className="m-auto text-2xl font-semibold text-center  "><span className="text-red-600">Admin</span> Login</p>

@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import {  ChevronDown, User,  } from "lucide-react"
+import { AppContext } from "../context/AppContext";
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
-  const [login, setLogin] = useState(false)
+  const {token} = useContext(AppContext)
+  
   
   const navigate = useNavigate()
   const [scrolled, setScrolled] = useState(false);
@@ -58,12 +60,12 @@ const Navbar = () => {
                 <li className="cursor-pointer hover:text-primary duration-300 ease-in-out">Contact</li>
               </NavLink>
             </ul>
-            {login ? (
-            <div className="flex items-center cursor-pointer group relative ">
+            {token ? (
+            <div className="flex items-center cursor-pointer group relative text-primary ">
             <User   />
             <ChevronDown   />
               <div className="absolute top-0 right-0 pt-16 text-lg font-medium  z-20 hidden group-hover:block">
-              <div className=" min-w-48 flex flex-col gap-2.5 p-4 bg-gray-950  bg-opacity-55">
+              <div className=" min-w-48 flex flex-col gap-2.5 p-4 bg-gray-950  bg-opacity-55 text-white">
                 <p 
                 onClick={()=>navigate("/my-profile")}
                 className="cursor-pointer hover:text-primary duration-300 ease-in-out" >My Profile</p>
@@ -104,7 +106,7 @@ const Navbar = () => {
         <div className=" border border-gray-200 bg-white py-7 max-sm:py-5 px-7 max-sm:px-5 shadow-md text-gray-950">
           <ul className="flex flex-col gap-4 max-sm:gap-2">
           {
-              login ? (
+            token ? (
                 <NavLink 
                 onClick={()=>setShowMenu(false)}
                  to="/my-profile">

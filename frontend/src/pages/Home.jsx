@@ -13,23 +13,23 @@ const Home = () => {
 
   return (
     <div className="">
-      <div className="min-h-screen    bg-[url('/src/assets/hero/h1_hero.png')] bg-cover max-sm:bg-contain   bg-no-repeat font-teko flex items-center justify-center relative  ">
-        <div className="w-full  md:pl-5  flex justify-around items-center  ">
-          <div className="w-1/2 flex flex-col xl:gap-8 sm:gap-6 sm: text-white max-sm:hidden overflow-hidden">
+      <div className="min-h-screen  bg-[url('/src/assets/hero/h1_hero.png')] bg-fixed  bg-cover    bg-no-repeat font-teko flex items-center justify-center relative  ">
+        <div className="w-full  md:pl-5  flex justify-around max-sm:justify-center  max-sm:px-2 items-center  ">
+          <div className="w-1/2 max-sm:w-full flex flex-col max-sm:items-center xl:gap-8 sm:gap-6 max-sm:gap-3 text-white  overflow-hidden">
             <div
-              className={`flex gap-4 items-center text-primary transition-transform duration-700 ease-out delay-100 ${
+              className={`flex gap-4 max-sm:gap-0.5 items-center text-primary max-sm:text-center transition-transform duration-700 ease-out delay-100 ${
                 isVisible
                   ? " translate-x-0 opacity-100"
                   : " -translate-x-full opacity-0"
               }`}
             >
               <hr className="border-none outline-none h-0.5 bg-primary w-10" />
-              <p className="text-2xl font-light uppercase tracking-wide">
+              <p className="text-2xl max-sm:text-center font-light uppercase tracking-wide">
                 With Patrick Potter
               </p>
             </div>
             <div
-              className={`text-wrap xl:text-7xl lg:text-6xl sm:text-5xl font-bold uppercase leading-tight transition-transform duration-700 ease-out delay-300 ${
+              className={`text-wrap max-sm:text-center xl:text-7xl lg:text-6xl sm:text-5xl max-sm:text-3xl font-bold uppercase leading-tight transition-transform duration-700 ease-out delay-300 ${
                 isVisible
                   ? " translate-x-0 opacity-100"
                   : "-translate-x-full opacity-0"
@@ -46,7 +46,7 @@ const Home = () => {
             >
               <button
                 onClick={() => navigate("/contact")}
-                className=" relative  w-48 text-center py-4 text-lg uppercase overflow-hidden  bg-primary group text-nowrap "
+                className=" relative  w-48 text-center py-4 mt-2.5 max-sm:text-center text-lg uppercase overflow-hidden  bg-primary group text-nowrap "
               >
                 <span className="relative z-10 tracking-wide text-white">
                   Became a member

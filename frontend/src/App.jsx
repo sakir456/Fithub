@@ -10,9 +10,21 @@ import WorkoutPlans from './pages/WorkoutPlans'
 import MyProfile from './pages/MyProfile'
 import AboutUs from './pages/AboutUs'
 import ContactUs from './pages/ContactUs'
+import PageNotFound from './pages/PageNotFound'
+import {GoogleOAuthProvider} from '@react-oauth/google'
+
 
 function App() {
   
+  const GoogleAuthWrapper = () => {
+    return (
+      <GoogleOAuthProvider clientId='564922959685-mgmfvhpvhq48891vft5titsu4fsvp64e.apps.googleusercontent.com'>
+        <Login></Login>
+      </GoogleOAuthProvider>
+    )
+  }
+
+
 
   return (
     <div className='w-screen h-screen'>
@@ -26,8 +38,9 @@ function App() {
     <Route path='/workout-plans' element={<WorkoutPlans />} />
     <Route path='/about' element={<AboutUs />} />
     <Route path='/contact' element={<ContactUs />} />
-    <Route path='/login' element={<Login />} />
+    <Route path='/login' element={<GoogleAuthWrapper />} />
     <Route path='/my-profile' element={<MyProfile />} />
+    <Route path='*' element={<PageNotFound />} />
    </Routes>
     
     </div>
