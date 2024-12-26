@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import {  ChevronDown, User,  } from "lucide-react"
+import {  ChevronDown,  User  } from "lucide-react"
 import { AppContext } from "../context/AppContext";
-
+import { IoFitness } from "react-icons/io5";
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
-  const {token} = useContext(AppContext)
+  const {token, setToken} = useContext(AppContext)
   
   
   const navigate = useNavigate()
@@ -22,15 +22,22 @@ const Navbar = () => {
     };
   }, []);
 
+  const logOut = ()=> {
+    token && setToken(false)
+    token && localStorage.removeItem("token")
+    navigate("/login")
+  }
+
   return (
     <div className="fixed top-0 left-0 w-full z-50">
       <div className={`    ${
         scrolled ? "bg-black shadow-md" : "bg-transparent"
       } font-teko lg:px-10 md:px-8 sm:px-5 max-sm:px-3`}>
         <div className="flex items-center">
-          <div className="max-sm:h-10 max-sm:w-10 flex flex-1">
-            <img src="/src/assets/logo/logo.png" />
-          </div>
+        <div className='flex flex-1    items-center gap-0.5 font-teko  text-primary   text-4xl max-sm:text-3xl font-semibold '>
+        <IoFitness    />
+       <span className='text-white  '>FITHUB </span>
+       </div>
 
           <div className=" hidden lg:flex gap-8 items-center text-white text-lg">
             <ul className="flex lg:gap-12 gap-7 py-10 text-lg font-medium">
@@ -69,7 +76,7 @@ const Navbar = () => {
                 <p 
                 onClick={()=>navigate("/my-profile")}
                 className="cursor-pointer hover:text-primary duration-300 ease-in-out" >My Profile</p>
-                <p className="cursor-pointer hover:text-primary duration-300 ease-in-out">Logout</p>
+                <p onClick={logOut} className="cursor-pointer hover:text-primary duration-300 ease-in-out">Logout</p>
               </div>
 
               </div>

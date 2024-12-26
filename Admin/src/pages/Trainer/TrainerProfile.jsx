@@ -97,10 +97,10 @@ const TrainerProfile = () => {
 
       <div className="mt-5">
       {isEdit ? (
-      <button onClick={updateProfile}  className=" border border-red-600 rounded-full px-4 py-1 text-sm hover:bg-red-600 hover:text-white transition-all ">Save</button>
+      <button onClick={updateProfile}  className=" border border-primary rounded-full px-4 py-1 text-sm hover:bg-primary hover:text-white transition-all ">Save</button>
       ) :
      (
-      <button onClick={()=> setIsEdit(true)} className=" border border-red-600 rounded-full px-4 py-1 text-sm hover:bg-red-600 hover:text-white transition-all ">Edit</button>
+      <button onClick={()=> setIsEdit(true)} className=" border border-primary rounded-full px-4 py-1 text-sm hover:bg-primary hover:text-white transition-all ">Edit</button>
       )
       }
       </div>

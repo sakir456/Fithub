@@ -2,7 +2,10 @@
 
 const MyProfile = () => {
   return (
-    <div>MyProfile</div>
+    <div>
+      <div className="   w-full h-24 bg-[url('/src/assets/hero/hero2.png')] flex justify-center items-center ">
+      </div>
+    </div>
   )
 }
 

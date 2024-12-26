@@ -122,7 +122,7 @@ const AddClassSchedule = () => {
         </div>
         <button
           type="Submit"
-          className="px-10 py-3 rounded-full bg-red-600 text-white "
+          className="px-10 py-3 rounded-full bg-primary text-white "
         >
           Add Class
         </button>

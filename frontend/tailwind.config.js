@@ -8,7 +8,8 @@ export default {
     extend: {
       fontFamily: {
          barlow:['Barlow', 'sans-serif'],
-         teko:['Teko', 'sans-serif']
+         teko:['Teko', 'sans-serif'],
+         outfit:['Outfit', 'sans-serif']
       },
       colors: {
         primary: '#ff1313', 

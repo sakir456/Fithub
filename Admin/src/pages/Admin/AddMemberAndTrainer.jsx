@@ -153,7 +153,7 @@ const AddMemberAndTrainer = () => {
         <p>About Trainer</p>
         <textarea value={about} onChange={(e)=> setAbout(e.target.value)} className=" px-3 py-2 border rounded " placeholder="write about Trainer" rows={5} required/>
         </div>
-          <button type="Submit" className="px-10 py-3 rounded-full bg-red-600 text-white ">Add Trainer</button>
+          <button type="Submit" className="px-10 py-3 rounded-full bg-primary text-white ">Add Trainer</button>
         </div>
     </form>
   )
