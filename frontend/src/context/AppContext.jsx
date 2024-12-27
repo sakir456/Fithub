@@ -1,4 +1,6 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import axios from "axios"
+import { toast } from "react-toastify";
 
 
 export const AppContext = createContext()
@@ -7,15 +9,42 @@ const AppContextProvider = (props)=> {
 
     const backendUrl = import.meta.env.VITE_BACKEND_URL
     const [token, setToken] = useState(localStorage.getItem("token") ? localStorage.getItem("token") : false )
+    const [userData, setUserData] = useState(false)
 
 
+
+const loadUserProfileData = async()=> {
+    try {
+         const {data} = await axios.get(backendUrl + "/api/user/get-profile", {headers:{token}})
+         if(data.success){
+            console.log(data.userData)
+          setUserData(data.userData)
+         } else{
+            toast.error(data.message)
+         }
+    } catch (error) {
+        console.log(error)
+        toast.error(error.message)
+    }
+}
 
 
 
     const value = {
         backendUrl,
-        token,setToken
+        token,setToken,
+        loadUserProfileData,
+        userData, setUserData
     }
+
+
+   useEffect(()=>{
+    if(token){
+        loadUserProfileData()
+    }else{
+        setUserData(false)
+    }
+}, [token])
 
 
 

@@ -53,8 +53,8 @@ const onSubmitHandler = async(event)=> {
          const result = await googleAuth(authResult['code'])  
         const token = result.data.token
         localStorage.setItem('token', token)
-        console.log(token)
-          navigate('/')
+        setToken(token)
+        navigate('/')
        }
          } catch (error) {
          console.log('Error while requesting google code :   ' ,error)

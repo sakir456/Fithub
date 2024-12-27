@@ -1,5 +1,6 @@
 import './App.css'
-import {ToastContainer} from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify"
 import Login from './pages/Login'
 import Navbar from './components/Navbar'
 import { Route, Routes } from 'react-router-dom'
@@ -12,6 +13,7 @@ import AboutUs from './pages/AboutUs'
 import ContactUs from './pages/ContactUs'
 import PageNotFound from './pages/PageNotFound'
 import {GoogleOAuthProvider} from '@react-oauth/google'
+
 
 
 function App() {
@@ -27,7 +29,7 @@ function App() {
 
 
   return (
-    <div className='w-screen h-screen'>
+    <div className=''>
     <ToastContainer/>
     <Navbar/>
   
