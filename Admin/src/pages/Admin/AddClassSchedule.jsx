@@ -57,10 +57,6 @@ const AddClassSchedule = () => {
     }
    },[aToken])
 
- 
-
- 
-
   return (
     <form onSubmit={onSubmitHandler} className="m-5 w-full">
       <p className="font-medium text-lg mb-3">Add Class</p>
@@ -78,12 +74,12 @@ const AddClassSchedule = () => {
                 onChange={(e) => setTiming(e.target.value)}
                 className="px-3 py-2 border rounded"
               >
-                <option value="7:00-8:00">7:00-8:00</option>
-                <option value="8:00-9:00">8:00-9:00</option>
-                <option value="9:00-10:00">9:00-10:00</option>
-                <option value="4:00-5:00">4:00-5:00</option>
-                <option value="5:00-6:00">5:00-6:00</option>
-                <option value="6:00-7:00">6:00-7:00</option>
+                <option value="7:00-8:00">7:00am-8:00am</option>
+                <option value="8:00-9:00">8:00am-9:00am</option>
+                <option value="9:00-10:00">9:00am-10:00am</option>
+                <option value="4:00-5:00">4:00pm-5:00pm</option>
+                <option value="5:00-6:00">5:00pm-6:00pm</option>
+                <option value="6:00-7:00">6:00pm-7:00pm</option>
               </select>
             </div>
           </div>

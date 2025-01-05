@@ -11,6 +11,7 @@ const AppContextProvider = (props) => {
   );
   const [userData, setUserData] = useState(false);
   const [classes, setClasses] = useState([]);
+  const [trainers, setTrainers] = useState([])
 
   const loadUserProfileData = async () => {
     try {
@@ -46,6 +47,21 @@ const AppContextProvider = (props) => {
     }
   };
 
+  const getTrainersData = async()=> {
+    try {
+     const {data} = await axios.get(backendUrl + "/api/trainer/list") 
+     if(data.success){
+      setTrainers(data.trainers)
+      console.log(data.trainers)
+    } else {
+      toast.error(data.message)
+    }
+    } catch (error) {
+      console.log(error)
+      toast.error(error.message)
+    }
+  }
+
   const value = {
     backendUrl,
     token,
@@ -56,10 +72,13 @@ const AppContextProvider = (props) => {
     classesForWeek,
     classes,
     setClasses,
+    getTrainersData,
+    trainers, setTrainers
   };
 
   useEffect(() => {
     classesForWeek();
+    getTrainersData()
   }, []);
 
   useEffect(() => {

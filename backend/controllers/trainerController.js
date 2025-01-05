@@ -142,5 +142,16 @@ const trainerDashboard = async(req,res)=> {
     
 
 }
+
+//API to get trainer list for frontend
+const trainerList = async(req, res)=> {
+    try {
+        const trainers = await trainerModel.find({}).select(["-password", "-email", "-salary", "-address"])
+        res.json({success:true, trainers})
+    } catch (error) {
+       console.log(error)
+       res.json({success:false, message:error.message }) 
+    }
+}
  
-export {loginTrainer, trainerProfile, updateTrainerProfile, trainerClasses, cancelClass, completeClass, trainerDashboard}
+export {loginTrainer, trainerProfile, updateTrainerProfile, trainerClasses, cancelClass, completeClass, trainerDashboard, trainerList}

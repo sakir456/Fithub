@@ -27,7 +27,7 @@ const Classes = () => {
         return acc
      },{})
 
-  console.log(groupedClasses)
+ 
 
   useEffect (()=> {
       const firstDate = Object.keys(groupedClasses)[0]
@@ -39,9 +39,9 @@ const Classes = () => {
 
  
     
-  return (
+  return classes && (
     <div className="py-20 font-teko flex flex-col gap-2 items-center">
-    <div  className="flex  gap-2 items-center text-primary transition-transform duration-700 ease-out delay-100">
+    <div  className="flex  gap-2 items-center text-primary ">
               <hr className="border-none outline-none h-0.5 bg-primary w-10" />
               <p className="text-2xl sm:text-xl max-sm:text-lg font-light uppercase md:tracking-wide">
                 Class Time Schedule
@@ -65,7 +65,10 @@ const Classes = () => {
                 <div key={index} className={`flex flex-col gap-2 p-10 justify-center items-center hover:bg-primary hover:text-white transition-all group ${isActiveClass===index ? "bg-primary text-white group" : "" }`} 
                 onClick={()=>setIsActiveClass(index)}
                 >
-                  <p className={`text-lg bg-black text-white py-1 px-5 group-hover:bg-white group-hover:text-black transition-all  ${isActiveClass===index ? "bg-white text-black " : "" } `}>{item.timing}</p>
+                  <p className={`text-lg py-1 px-5 transition-all 
+                  ${isActiveClass === index ? "bg-white text-black" : "bg-black text-white group-hover:bg-white group-hover:text-black"}`}>
+                  {item.timing}
+                  </p>
                   <p className="text-3xl mt-2">{item.className}</p>
                   <p className="font-barlow mt-2 text-sm ">{item.trainerName}</p> 
                 </div>

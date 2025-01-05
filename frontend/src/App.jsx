@@ -13,6 +13,7 @@ import AboutUs from './pages/AboutUs'
 import ContactUs from './pages/ContactUs'
 import PageNotFound from './pages/PageNotFound'
 import {GoogleOAuthProvider} from '@react-oauth/google'
+import ScrollToTop from './components/ScrollToTop';
 
 
 
@@ -32,7 +33,7 @@ function App() {
     <div className=''>
     <ToastContainer/>
     <Navbar/>
-  
+    <ScrollToTop />
     <Routes>
     <Route path='/' element={<Home />} />
     <Route path='/schedule' element={<Schedule />} />

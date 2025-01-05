@@ -150,7 +150,7 @@ const updateProfile  = async(req, res)=> {
     }
 }
 
-//API to get classes for week for user panel
+//API to get classes for week for frontend
 const getClasses = async(req,res) => {
     try {
         const today = new Date()
@@ -171,6 +171,8 @@ const getClasses = async(req,res) => {
         res.json({success:false, message:error.message})
     }
 }
+
+
 
 
 

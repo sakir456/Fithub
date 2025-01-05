@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import AboutUs from "./AboutUs";
 import About from "../components/About";
 import Classes from "../components/Classes";
+import Trainers from "../components/Trainers";
 
 const Home = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -64,6 +65,7 @@ const Home = () => {
         </div>
       </div>
     <About/>
+    <Trainers/>
     <Classes/>
 
     </div>
