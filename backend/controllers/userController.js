@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 import validator from "validator";
 import {v2 as cloudinary} from "cloudinary"
+import classModel from "../models/classModel.js";
 
 
 // API to googleLogin
@@ -115,7 +116,7 @@ const getProfile = async(req, res)=> {
     }
 }
 
-//Api to update user Profile
+//API to update user Profile
 const updateProfile  = async(req, res)=> {
     try {
         const { userId, name, phone, address, dob, gender } = req.body;
@@ -149,4 +150,28 @@ const updateProfile  = async(req, res)=> {
     }
 }
 
-export { googleLogin, registerUser, signInUser, getProfile, updateProfile }
+//API to get classes for week for user panel
+const getClasses = async(req,res) => {
+    try {
+        const today = new Date()
+        today.setHours(0,0,0,0);
+
+        const endDate = new Date()
+        endDate.setDate(today.getDate() + 6)
+
+        const classes = await classModel.find({
+            date: {
+                $gte: today,
+                $lte: endDate
+            }
+        }).sort({ date:1 });
+     res.json({success:true, classes})
+    } catch (error) {
+        console.log(error)
+        res.json({success:false, message:error.message})
+    }
+}
+
+
+
+export { googleLogin, registerUser, signInUser, getProfile, updateProfile, getClasses }

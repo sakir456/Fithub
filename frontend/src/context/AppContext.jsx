@@ -1,63 +1,78 @@
 import { createContext, useEffect, useState } from "react";
-import axios from "axios"
+import axios from "axios";
 import { toast } from "react-toastify";
 
+export const AppContext = createContext();
 
-export const AppContext = createContext()
+const AppContextProvider = (props) => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  const [token, setToken] = useState(
+    localStorage.getItem("token") ? localStorage.getItem("token") : false
+  );
+  const [userData, setUserData] = useState(false);
+  const [classes, setClasses] = useState([]);
 
-const AppContextProvider = (props)=> {
-
-    const backendUrl = import.meta.env.VITE_BACKEND_URL
-    const [token, setToken] = useState(localStorage.getItem("token") ? localStorage.getItem("token") : false )
-    const [userData, setUserData] = useState(false)
-
-
-
-const loadUserProfileData = async()=> {
+  const loadUserProfileData = async () => {
     try {
-         const {data} = await axios.get(backendUrl + "/api/user/get-profile", {headers:{token}})
-         if(data.success){
-            console.log(data.userData)
-          setUserData(data.userData)
-         } else{
-            toast.error(data.message)
-         }
+      const { data } = await axios.get(backendUrl + "/api/user/get-profile", {
+        headers: { token },
+      });
+      if (data.success) {
+        console.log(data.userData);
+        setUserData(data.userData);
+      } else {
+        toast.error(data.message);
+      }
     } catch (error) {
-        console.log(error)
-        toast.error(error.message)
+      console.log(error);
+      toast.error(error.message);
     }
-}
+  };
 
-
-
-    const value = {
-        backendUrl,
-        token,setToken,
-        loadUserProfileData,
-        userData, setUserData
+  const classesForWeek = async () => {
+    try {
+      const { data } = await axios.get(
+        backendUrl + "/api/user/get-classes"
+      );
+      if (data.success) {
+        console.log(data.classes);
+        setClasses(data.classes);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
     }
+  };
 
+  const value = {
+    backendUrl,
+    token,
+    setToken,
+    loadUserProfileData,
+    userData,
+    setUserData,
+    classesForWeek,
+    classes,
+    setClasses,
+  };
 
-   useEffect(()=>{
-    if(token){
-        loadUserProfileData()
-    }else{
-        setUserData(false)
+  useEffect(() => {
+    classesForWeek();
+  }, []);
+
+  useEffect(() => {
+    if (token) {
+      loadUserProfileData();
+    } else {
+      setUserData(false);
     }
-}, [token])
+  }, [token]);
 
+  return (
+    <AppContext.Provider value={value}>{props.children}</AppContext.Provider>
+  );
+};
 
-
-
-
-
-
-    return (
-        <AppContext.Provider value={value}>
-             {props.children}
-        </AppContext.Provider>
-    )
-}
-
-
-export default AppContextProvider
+export default AppContextProvider;
