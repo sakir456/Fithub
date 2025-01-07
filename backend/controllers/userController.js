@@ -6,6 +6,7 @@ import bcrypt from "bcrypt"
 import validator from "validator";
 import {v2 as cloudinary} from "cloudinary"
 import classModel from "../models/classModel.js";
+import queryModel from "../models/queryModel.js";
 
 
 // API to googleLogin
@@ -172,8 +173,36 @@ const getClasses = async(req,res) => {
     }
 }
 
+//API to save User Query 
+const saveQuery = async(req, res)=> {
+    try {
+         const {name, email, subject, message} = req.body;
+         
+         if(!name || !email || !subject ||  !message) {
+            return res.json({success:false, message:"Please fill all the fields "})
+         }
+         const queryData = {
+            name,
+            email,
+            subject,
+            message,
+            date: Date.now()
+         }
+       
+         const newQuery = new queryModel(queryData)
+         await newQuery.save()
+
+         res.json({success:true, message:"Query Submitted Successfully"})
+
+        
+
+    } catch (error) {
+        console.log(error)
+        res.json({success:false, message:error.message})
+    }
+}
 
 
 
 
-export { googleLogin, registerUser, signInUser, getProfile, updateProfile, getClasses }
+export { googleLogin, registerUser, signInUser, getProfile, updateProfile, getClasses, saveQuery }

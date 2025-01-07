@@ -15,6 +15,7 @@ import TrainerDashboard from './pages/Trainer/TrainerDashboard';
 import { TrainerContext } from './context/TrainerContext';
 import TrainerClasses from './pages/Trainer/TrainerClasses';
 import TrainerProfile from './pages/Trainer/TrainerProfile';
+import UserQueries from './pages/Admin/UserQueries';
 
 
 function App() {
@@ -35,10 +36,13 @@ function App() {
         <Route path='/members' element= {<><MembersList/></>} />
         <Route path='/addmemberandtrainer' element= {<><AddMemberAndTrainer/></>} />
         <Route path='/class-schedule' element= {<><AddClassSchedule/></>} />
+        <Route path='/user-queries' element= {<><UserQueries/></>} />
+        
         {/* Trainer Routes */}
         <Route path='/trainer-dashboard' element= {<><TrainerDashboard/></>} />
         <Route path='/trainer-classes' element= {<><TrainerClasses/></>} />
         <Route path='/trainer-profile' element= {<><TrainerProfile/></>} />
+        
 
       </Routes>
     </div>

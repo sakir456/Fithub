@@ -40,7 +40,7 @@ const Classes = () => {
  
     
   return classes && (
-    <div className="py-20 font-teko flex flex-col gap-2 items-center">
+    <div className="pt-10 pb-20 font-teko flex flex-col gap-2 items-center">
     <div  className="flex  gap-2 items-center text-primary ">
               <hr className="border-none outline-none h-0.5 bg-primary w-10" />
               <p className="text-2xl sm:text-xl max-sm:text-lg font-light uppercase md:tracking-wide">

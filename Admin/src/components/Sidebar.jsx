@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { AdminContext } from "../context/AdminContext"
 import { NavLink } from "react-router-dom"
-import { ChartNoAxesColumnIncreasing, ClipboardList, NotepadText, UserPen, UserPlus, Users } from "lucide-react"
+import { ChartNoAxesColumnIncreasing, ClipboardList, NotepadText, UserPen, UserPlus, Users, MessageSquare } from "lucide-react"
 import { TrainerContext } from "../context/TrainerContext"
 
 
@@ -47,6 +47,13 @@ const Sidebar = () => {
        className={({isActive})=> `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-72 ${isActive ? "bg-red-50 border-r-4 border-primary" : ""}`}>
            <ClipboardList />
        <p className="hidden md:block">Class Schedule</p>
+       </NavLink>
+
+       <NavLink 
+       to={"/user-queries"}
+       className={({isActive})=> `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-72 ${isActive ? "bg-red-50 border-r-4 border-primary" : ""}`}>
+          <MessageSquare />
+       <p className="hidden md:block">User Queries</p>
        </NavLink>
      </ul>
                   
