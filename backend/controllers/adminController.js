@@ -4,6 +4,7 @@ import bcrypt from "bcrypt"
 import {v2 as cloudinary} from "cloudinary"
 import trainerModel from "../models/trainerModel.js";
 import classModel from "../models/classModel.js";
+import queryModel from "../models/queryModel.js";
 
 
 
@@ -124,4 +125,15 @@ const addClass = async(req, res)=> {
   }
 }
 
-export  {loginAdmin, addTrainer, allTrainers, addClass}
+//API to get User Queries
+const getQueries = async(req,res)=> {
+  try {
+     const queries = await queryModel.find({})
+     res.json({success:true, queries})
+  } catch (error) {
+      console.log(error)
+      res.json({success:false, message:error.message})
+  }
+}
+
+export  {loginAdmin, addTrainer, allTrainers, addClass, getQueries}

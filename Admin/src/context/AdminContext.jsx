@@ -1,4 +1,4 @@
-import { createContext,  useState } from "react";
+import { createContext,  useEffect,  useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -9,6 +9,7 @@ const AdminContextProvider = (props) => {
 
     const [aToken, setAToken] = useState(localStorage.getItem("aToken")? localStorage.getItem("aToken") : "")
     const [trainers, setTrainers] = useState([])
+    const [queries, setQueries] = useState([])
 
     const backendUrl = import.meta.env.VITE_BACKEND_URL
 
@@ -26,12 +27,32 @@ const AdminContextProvider = (props) => {
         }
     }
 
+    const getQueries = async()=> {
+        try {
+            const {data}  = await axios.get(backendUrl + "/api/admin/get-queries", {headers:{aToken}})
+            if(data.success){
+             setQueries(data.queries)
+             console.log(data.queries)
+            } else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
     const value = {
        backendUrl,aToken,
         setAToken,
         trainers, setTrainers,
-        getAllTrainers
+        getAllTrainers, 
+        queries, setQueries,
+        getQueries
     }
+
+    useEffect(()=>{
+     getQueries()
+    },[])
 
   
     return (
