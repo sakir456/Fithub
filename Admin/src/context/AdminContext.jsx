@@ -10,8 +10,25 @@ const AdminContextProvider = (props) => {
     const [aToken, setAToken] = useState(localStorage.getItem("aToken")? localStorage.getItem("aToken") : "")
     const [trainers, setTrainers] = useState([])
     const [queries, setQueries] = useState([])
+    const [users, setUsers] = useState([])
 
     const backendUrl = import.meta.env.VITE_BACKEND_URL
+
+    const getAllUSers = async()=> {
+        try {
+            const {data} = await axios.post(backendUrl + "/api/admin/all-users", {}, {headers:{aToken}}) 
+            if(data.success){
+                setUsers(data.users)
+                console.log(data.users)
+            } else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            console.log(error)
+            toast.error(error.message)
+        }
+        
+    }
 
     const getAllTrainers = async()=> {
         try {
@@ -23,6 +40,7 @@ const AdminContextProvider = (props) => {
                 toast.error(data.message)
             }
         } catch (error) {
+            console.log(error)
             toast.error(error.message)
         }
     }
@@ -37,17 +55,50 @@ const AdminContextProvider = (props) => {
                 toast.error(data.message)
             }
         } catch (error) {
+            console.log(error)
             toast.error(error.message)
         }
+    }
+
+    const readQuery = async(queryId)=> {
+        try {
+             const {data} = await axios.post(backendUrl + "/api/admin/read-query", {queryId}, {headers:{aToken}})
+             if(data.success){
+                toast.success(data.message)
+                getQueries()
+             } else{
+                toast.error(data.message)
+             }
+        } catch (error) {
+            console.log(error)
+            toast.error(error.message)
+        } 
+    }
+    const unReadQuery = async(queryId)=> {
+        try {
+             const {data} = await axios.post(backendUrl + "/api/admin/unread-query", {queryId}, {headers:{aToken}})
+             if(data.success){
+                toast.success(data.message)
+                getQueries()
+             } else{
+                toast.error(data.message)
+             }
+        } catch (error) {
+            console.log(error)
+            toast.error(error.message)
+        } 
     }
 
     const value = {
        backendUrl,aToken,
         setAToken,
+        getAllTrainers,
         trainers, setTrainers,
-        getAllTrainers, 
+        getAllUSers,
+        users, setUsers,
         queries, setQueries,
-        getQueries
+        getQueries, 
+        readQuery, unReadQuery
     }
 
     useEffect(()=>{

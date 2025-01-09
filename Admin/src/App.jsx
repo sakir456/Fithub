@@ -9,13 +9,13 @@ import { Route, Routes } from 'react-router-dom';
 import Dashboard from './pages/Admin/Dashboard';
 import TrainersList from './pages/Admin/TrainersList';
 import MembersList from './pages/Admin/MembersList';
-import AddMemberAndTrainer from './pages/Admin/AddMemberAndTrainer';
 import AddClassSchedule from './pages/Admin/AddClassSchedule';
 import TrainerDashboard from './pages/Trainer/TrainerDashboard';
 import { TrainerContext } from './context/TrainerContext';
 import TrainerClasses from './pages/Trainer/TrainerClasses';
 import TrainerProfile from './pages/Trainer/TrainerProfile';
 import UserQueries from './pages/Admin/UserQueries';
+import AddTrainer from './pages/Admin/AddTrainer';
 
 
 function App() {
@@ -34,7 +34,7 @@ function App() {
         <Route path='/admin-dashboard' element= {<><Dashboard/></>} />
         <Route path='/trainers' element= {<><TrainersList/></>} />
         <Route path='/members' element= {<><MembersList/></>} />
-        <Route path='/addmemberandtrainer' element= {<><AddMemberAndTrainer/></>} />
+        <Route path='/addtrainer' element= {<><AddTrainer/></>} />
         <Route path='/class-schedule' element= {<><AddClassSchedule/></>} />
         <Route path='/user-queries' element= {<><UserQueries/></>} />
         

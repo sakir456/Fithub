@@ -4,7 +4,7 @@ import axios from "axios"
 import { AdminContext } from "../../context/AdminContext"
 
 
-const AddMemberAndTrainer = () => {
+const AddTrainer = () => {
     const [trainerImg, setTrainerImg] = useState(false)
     const [name, setName] = useState("")
     const  [email, setEmail] = useState("")
@@ -159,4 +159,4 @@ const AddMemberAndTrainer = () => {
   )
 }
 
-export default AddMemberAndTrainer
+export default AddTrainer

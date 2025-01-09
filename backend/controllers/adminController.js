@@ -5,6 +5,7 @@ import {v2 as cloudinary} from "cloudinary"
 import trainerModel from "../models/trainerModel.js";
 import classModel from "../models/classModel.js";
 import queryModel from "../models/queryModel.js";
+import userModel from "../models/userModel.js";
 
 
 
@@ -83,6 +84,17 @@ const addTrainer = async(req, res)=> {
   }
 }
 
+//API to get All users
+const allUsers = async(req, res)=> {
+  try {
+     const users = await userModel.find({}).select(["-password", "-authType"])
+     res.json({success:true, users})
+  } catch (error) {
+     console.log(error)
+     res.json({success:false, message:error.messsage})
+  }
+}
+
 //API to get all Trainers
 const allTrainers = async(req,res)=> {
   try {
@@ -94,6 +106,8 @@ const allTrainers = async(req,res)=> {
      res.json({success:false, message:error.message})
   }
 }
+
+
 
 const addClass = async(req, res)=> {
 
@@ -136,4 +150,26 @@ const getQueries = async(req,res)=> {
   }
 }
 
-export  {loginAdmin, addTrainer, allTrainers, addClass, getQueries}
+//API to Update User Query to Read
+const readQuery = async(req, res)=> {
+  const {queryId} = req.body;
+  const queryData = await queryModel.findById(queryId)
+  if(queryData){
+    await queryModel.findByIdAndUpdate(queryId, {isCompleted: true})
+  }
+  res.json({success:true, message:"Query Updated Successfully"})
+} 
+
+//API to Update User Query to Unread
+const unReadQuery = async(req, res)=> {
+  const {queryId} = req.body;
+  const queryData = await queryModel.findById(queryId)
+  if(queryData){
+    await queryModel.findByIdAndUpdate(queryId, {isCompleted: false})
+  }
+  res.json({success:true, message:"Query Updated Successfully"})
+} 
+
+
+
+export  {loginAdmin, addTrainer, allUsers, allTrainers,  addClass, getQueries, readQuery, unReadQuery}

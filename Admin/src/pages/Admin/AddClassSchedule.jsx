@@ -101,6 +101,7 @@ const AddClassSchedule = () => {
             </div>
             <div className=" flex-1 flex flex-col gap-1 ">
               <p>Trainer Name</p>
+              {trainers &&(
               <select
                 value={trainerId}
                 onChange={selectTrainer}
@@ -113,6 +114,7 @@ const AddClassSchedule = () => {
                   </option>
                 ))}
               </select>
+              )}
             </div>
           </div>
         </div>
