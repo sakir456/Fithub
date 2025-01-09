@@ -52,14 +52,14 @@ const UserQueries = () => {
             <div className=" bg-white p-5 border rounded hover:shadow-md" key={index}>
               <div className="flex flex-col">
                 <div className="flex items-center gap-2 ">
-                  <img className="h-8 w-8 rounded-full" src={queries.image} />
-                  <div className="">
+                  <img className="w-8 rounded-full" src={item.image} />
+                  <div className="text-sm">
                     <p className="font-medium">{item.name}</p>
-                    <p className="text-sm text-gray-400">{item.email}</p>
+                    <p className=" text-gray-400">{item.email}</p>
                   </div>
                 </div>
-                <p className="mt-2 font-medium">{item.subject}</p>
-                <p className="text-sm flex fle-wrap  ">{item.message}</p>
+                <p className="mt-2 font-medium text-sm">{item.subject}</p>
+                <p className="text-sm flex fle-wrap mt-0.5  ">{item.message}</p>
                 <div className="flex items-center justify-between">
                   <p className="mt-5 text-sm text-gray-400 ">
                     {extractDateAndTime(item.date)}

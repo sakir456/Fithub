@@ -14,7 +14,7 @@ const AdminContextProvider = (props) => {
 
     const backendUrl = import.meta.env.VITE_BACKEND_URL
 
-    const getAllUSers = async()=> {
+    const getAllUSers = async()=> {6
         try {
             const {data} = await axios.post(backendUrl + "/api/admin/all-users", {}, {headers:{aToken}}) 
             if(data.success){

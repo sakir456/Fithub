@@ -11,7 +11,7 @@ const TrainersList = () => {
  useEffect(()=> {
   if(aToken){
     getAllTrainers()
-  }
+  }   
  },[aToken])
 
 

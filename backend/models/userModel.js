@@ -40,6 +40,10 @@ const userSchema = new mongoose.Schema({
     phone: {
         type:String,
         default:"000000000"
+    },
+    fees: {
+      type:Boolean,
+      default: false
     }
 });
 
