@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import { AppContext } from "../context/AppContext"
+import SectionHeader from "./SectionHeader"
 
 
 const Classes = () => {
@@ -40,14 +41,11 @@ const Classes = () => {
  
     
   return classes && (
-    <div className="pt-10 pb-20 font-teko flex flex-col gap-2 items-center">
-    <div  className="flex  gap-2 items-center text-primary ">
-              <hr className="border-none outline-none h-0.5 bg-primary w-10" />
-              <p className="text-2xl sm:text-xl max-sm:text-lg font-light uppercase md:tracking-wide">
-                Class Time Schedule
-              </p>
-            </div>
-    <p className=" flex flex-wrap md:text-4xl text-2xl sm:text-3xl font-semibold uppercase text-center mt-2 max-sm:mx-2">Select the Perfect Class For You Now</p>
+    <div className="md:px-20 px-6 pt-5  font-teko flex flex-col justify-center items-center  gap-2  text-indigo-950">
+    <div className="flex flex-col justify-center items-center   md:gap-5">
+     <SectionHeader title="Class Time Schedule" textColor="text-primary" bgColor="bg-primary" />
+    <p className=" flex flex-wrap md:font-bold font-semibold  md:text-5xl sm:text-4xl text-3xl uppercase text-center  ">Select the Perfect Class For You Now</p>
+    </div>
     <div className="flex flex-col gap-14 mt-5  justify-center items-center">
       <div className="flex flex-wrap justify-center items-center gap-4 text-2xl font-medium   ">
         {

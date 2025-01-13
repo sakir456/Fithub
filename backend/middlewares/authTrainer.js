@@ -5,9 +5,8 @@ const authTrainer = async(req, res, next)=> {
     try {
         const {ttoken} = req.headers;
         if(!ttoken){
-            res.json({success:false, message:"Not Authorized login again"})
+            return res.json({success:false, message:"Not Authorized login again"})
         }
-
         const token_decode = jwt.verify(ttoken, process.env.JWT_SECRET)
         req.body.trainerId = token_decode.id
         next()

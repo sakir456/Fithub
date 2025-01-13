@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import {  ChevronDown,  User  } from "lucide-react"
 import { AppContext } from "../context/AppContext";
 import { IoFitness } from "react-icons/io5";
+import Button from "./Button";
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const {token, setToken} = useContext(AppContext)
@@ -82,13 +83,7 @@ const Navbar = () => {
               </div>
             </div>
           ) : (
-            <button 
-            onClick={()=>navigate("/login")}
-            className="relative px-9 py-4 text-lg uppercase overflow-hidden bg-primary group">
-              <span className="relative z-10 text-white ">Create Account</span>
-              <div className="absolute inset-0 bg-primary-hover transform scale-x-0 
-              origin-left transition-transform duration-300 ease-linear group-hover:scale-x-100"></div>
-            </button>
+            <Button   label="Create Account" navigatePath="/login" />
           )}
             
           </div>

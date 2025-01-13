@@ -1,11 +1,11 @@
 import { Search } from "lucide-react";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AdminContext } from "../../context/AdminContext";
 import { Mail } from "lucide-react";
 import { MailOpen } from "lucide-react";
 
 const UserQueries = () => {
-  const { queries, readQuery, unReadQuery } = useContext(AdminContext);
+  const { queries, readQuery, unReadQuery, getQueries, aToken } = useContext(AdminContext);
 
   const [searchQuery, setsearchQuery] = useState("");
 
@@ -29,6 +29,12 @@ const UserQueries = () => {
     return filterQuery;
   });
 
+  useEffect(()=>{
+    if(aToken){
+      getQueries()
+    }
+  },[aToken])
+
   return (
     queries && (
       <div className="w-full max-w-4xl  m-5">
@@ -51,10 +57,10 @@ const UserQueries = () => {
           {filteredQueries.reverse().map((item, index) => (
             <div className=" bg-white p-5 border rounded hover:shadow-md" key={index}>
               <div className="flex flex-col">
-                <div className="flex items-center gap-2 ">
+                <div className="flex items-center gap-0.5 ">
                   <img className="w-8 rounded-full" src={item.image} />
                   <div className="text-sm">
-                    <p className="font-medium">{item.name}</p>
+                    <p className="font-medium ">{item.name}</p>
                     <p className=" text-gray-400">{item.email}</p>
                   </div>
                 </div>

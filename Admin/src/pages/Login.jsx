@@ -35,6 +35,7 @@ const onSubmitHandler = async(event)=> {
             }
         }
     } catch (error) {
+      
          toast.error(error.message)
     }
 

@@ -15,6 +15,9 @@ export default {
         primary: '#ff1313', 
         'primary-hover': '#c20505',
       },
+      gridTemplateColumns:{
+        'auto':'repeat(auto-fill, minmax(200px, 1fr))'
+      }
     },
   },
   plugins: [],

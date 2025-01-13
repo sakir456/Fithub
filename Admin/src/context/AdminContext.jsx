@@ -101,9 +101,7 @@ const AdminContextProvider = (props) => {
         readQuery, unReadQuery
     }
 
-    useEffect(()=>{
-     getQueries()
-    },[])
+   
 
   
     return (

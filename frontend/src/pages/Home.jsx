@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import AboutUs from "./AboutUs";
+
+
 import About from "../components/About";
 import Classes from "../components/Classes";
 import Trainers from "../components/Trainers";
+import TeamMembersText from "../components/TeamMembersText";
+import Button from "../components/Button";
+import Services from "../components/Services";
 
 const Home = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const navigate = useNavigate();
-
+ 
   useEffect(() => {
     setIsVisible(true);
   }, []);
@@ -46,18 +48,8 @@ const Home = () => {
                   : "-translate-x-full opacity-0"
               }`}
             >
-              <button
-                onClick={() => navigate("/contact")}
-                className=" relative  w-48 text-center py-4 mt-2.5 max-sm:text-center text-lg uppercase overflow-hidden  bg-primary group text-nowrap "
-              >
-                <span className="relative z-10 tracking-wide text-white">
-                  Became a member
-                </span>
-                <div
-                  className="absolute inset-0 bg-primary-hover transform scale-x-0 
-      origin-left transition-transform duration-300 ease-linear group-hover:scale-x-100 text-white  "
-                ></div>
-              </button>
+             
+              <Button   label="Become a Member" navigatePath="/contact" />
             </div>
           </div>
 
@@ -65,6 +57,8 @@ const Home = () => {
         </div>
       </div>
     <About/>
+    <Services/>
+    <TeamMembersText/>
     <Trainers/>
     <Classes/>
 
