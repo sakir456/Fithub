@@ -41,10 +41,14 @@ const Classes = () => {
  
     
   return classes && (
-    <div className="md:px-20 px-6 pt-5  font-teko flex flex-col justify-center items-center  gap-2  text-indigo-950">
-    <div className="flex flex-col justify-center items-center   md:gap-5">
+    <div className=" pt-5  font-teko flex flex-col justify-center items-center  gap-2  text-indigo-950">
+    <div className="flex flex-col justify-center items-center   sm:gap-5">
      <SectionHeader title="Class Time Schedule" textColor="text-primary" bgColor="bg-primary" />
-    <p className=" flex flex-wrap md:font-bold font-semibold  md:text-5xl sm:text-4xl text-3xl uppercase text-center  ">Select the Perfect Class For You Now</p>
+    <p className=" flex flex-wrap flex-col max-sm:text-center w-full md:font-bold font-semibold  md:text-5xl sm:text-4xl text-3xl uppercase justify-center     ">Select the Perfect Class 
+
+    <br/> 
+    <span className="text-center"> For You Now</span>
+     </p>
     </div>
     <div className="flex flex-col gap-14 mt-5  justify-center items-center">
       <div className="flex flex-wrap justify-center items-center gap-4 text-2xl font-medium   ">
