@@ -10,7 +10,7 @@ const services = [
       description: "Receive personalized care and guidance to ensure your health and fitness journey is safe and effective.",
     },
     {
-      image: "/src/assets/gallery/GymStrategies.png",
+      image: "/src/assets/gallery/ProfessionalTrainers.png",
       title: "Professional Trainers",
       description: "Train with certified professionals who provide expert advice, customized workout plans, and motivation to keep you on track.",
     },

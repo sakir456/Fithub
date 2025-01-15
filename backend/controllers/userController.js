@@ -4,6 +4,7 @@ import userModel from "../models/userModel.js";
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 import validator from "validator";
+import OpenAI from 'openai';
 import {v2 as cloudinary} from "cloudinary"
 import classModel from "../models/classModel.js";
 import queryModel from "../models/queryModel.js";
@@ -201,8 +202,45 @@ const saveQuery = async(req, res)=> {
         res.json({success:false, message:error.message})
     }
 }
+ // API to generate user workOut plan
+
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY 
+  });
+
+const generateWorkOutPlan = async(req, res)=> {
+    try {
+        const {age, gender,height, weight, fitnessLevel, fitnessGoals, medicalConditions} = req.body;
+
+        if(!age || !gender || !height || !weight || !fitnessLevel || !fitnessGoals){
+            return res.josn({success:false, message:"please Enter all the fields"})
+        }
+
+        const prompt = `Create a personalized workout plan for a ${age}-year-old ${gender}, 
+        height ${height} cm, weight ${weight} kg, fitness level: ${fitnessLevel}. 
+        Goals: ${fitnessGoals}. Medical Conditions: ${medicalConditions || 'None'}`
+
+        //call OpenAI API
+        const completion = await openai.chat.completions.create({
+            model: "gpt-4o-mini",
+            messages: [
+                { role: "system", content: "You are a fitness coach." },
+                {
+                    role: "user",
+                    content: prompt,
+                },
+            ],
+        });
+
+        const workOutPlan = completion.choices[0].message.content;
+
+        res.json({success:true, workOutPlan})
+  } catch (error) {
+        console.log(error)
+        res.json({success:false, message:error.message})
+    }
+}
 
 
 
-
-export { googleLogin, registerUser, signInUser, getProfile, updateProfile, getClasses, saveQuery }
+export { googleLogin, registerUser, signInUser, getProfile, updateProfile, getClasses, saveQuery, generateWorkOutPlan }
