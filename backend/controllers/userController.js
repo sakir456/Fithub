@@ -4,7 +4,7 @@ import userModel from "../models/userModel.js";
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 import validator from "validator";
-import OpenAI from 'openai';
+import OpenAI from "openai";
 import {v2 as cloudinary} from "cloudinary"
 import classModel from "../models/classModel.js";
 import queryModel from "../models/queryModel.js";
@@ -204,13 +204,13 @@ const saveQuery = async(req, res)=> {
 }
  // API to generate user workOut plan
 
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY 
-  });
+ const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+});
 
-const generateWorkOutPlan = async(req, res)=> {
+const generateWorkOutPlan = async(ws, data)=> {
     try {
-        const {age, gender,height, weight, fitnessLevel, fitnessGoals, medicalConditions} = req.body;
+        const {age, gender,height, weight, fitnessLevel, fitnessGoals, medicalConditions} = data;
 
         if(!age || !gender || !height || !weight || !fitnessLevel || !fitnessGoals){
             return res.josn({success:false, message:"please Enter all the fields"})
@@ -220,27 +220,34 @@ const generateWorkOutPlan = async(req, res)=> {
         height ${height} cm, weight ${weight} kg, fitness level: ${fitnessLevel}. 
         Goals: ${fitnessGoals}. Medical Conditions: ${medicalConditions || 'None'}`
 
-        //call OpenAI API
-        const completion = await openai.chat.completions.create({
+        const stream = await openai.chat.completions.create({
             model: "gpt-4o-mini",
             messages: [
                 { role: "system", content: "You are a fitness coach." },
-                {
-                    role: "user",
-                    content: prompt,
-                },
+                { role: "user", content: prompt }
             ],
+            stream: true,
         });
 
-        const workOutPlan = completion.choices[0].message.content;
+        // Process the stream and send data to the client in real-time
+        for await (const chunk of stream) {
+            const content = chunk.choices[0]?.delta?.content || "";
 
-        res.json({success:true, workOutPlan})
+            if (content) {
+                // Send each part of the content (word-by-word or line-by-line)
+                ws.send(content);
+                await new Promise(resolve => setTimeout(resolve, 100)); // Add delay to simulate typing effect
+            }
+        }
   } catch (error) {
-        console.log(error)
-        res.json({success:false, message:error.message})
+    console.error('Error generating workout plan:', error);
+    ws.send(JSON.stringify({ error: 'Failed to generate workout plan' }));
     }
 }
 
 
 
 export { googleLogin, registerUser, signInUser, getProfile, updateProfile, getClasses, saveQuery, generateWorkOutPlan }
+
+
+

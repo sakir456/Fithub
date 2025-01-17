@@ -5,7 +5,7 @@ import SectionHeader from "./SectionHeader";
 const Trainers = () => {
   const { trainers } = useContext(AppContext);
   return (
-    <div className="px-6 md:pt-5  pb-10 font-teko flex flex-col gap-2 items-center">
+    <div className="px-6 pt-5  pb-10 font-teko flex flex-col gap-2 items-center">
      
 
       <div className="   flex flex-wrap justify-center items-center gap-3 pt-5 gap-y-6">
