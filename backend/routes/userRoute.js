@@ -1,5 +1,5 @@
 import express from "express"
-import {  generateWorkOutPlan, getClasses, getProfile, googleLogin, registerUser, saveQuery, signInUser, updateProfile } from "../controllers/userController.js"
+import {   getClasses, getProfile, googleLogin, registerUser, saveQuery, signInUser, updateProfile } from "../controllers/userController.js"
 import authUser from "../middlewares/authUser.js"
 import upload from "../middlewares/multer.js"
 
@@ -13,7 +13,7 @@ userRouter.get("/get-profile", authUser, getProfile)
 userRouter.post("/update-profile",upload.single("image"),authUser, updateProfile)
 userRouter.get("/get-classes", getClasses )
 userRouter.post("/savequery", authUser, saveQuery)
-userRouter.post("/generate-workoutplan", authUser, generateWorkOutPlan)
+
 
 
 

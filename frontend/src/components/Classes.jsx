@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import { AppContext } from "../context/AppContext"
 import SectionHeader from "./SectionHeader"
+import {useNavigate} from "react-router-dom"
 
 
 const Classes = () => {
@@ -11,7 +12,9 @@ const Classes = () => {
   const [isActive, setIsActive]  = useState(null)
   const [selectedClasses, setSelectedClasses]  = useState([])
   const [isActiveClass, setIsActiveClass] = useState(0)
-
+  
+  const navigate = useNavigate()
+  
 
   const extractDay = (date)=> {
      const newDate = new Date(date)
@@ -28,6 +31,7 @@ const Classes = () => {
         return acc
      },{})
 
+     
  
 
   useEffect (()=> {
@@ -64,8 +68,8 @@ const Classes = () => {
           selectedClasses.length > 0 && (
             
               selectedClasses.map((item,index)=> (
-                <div key={index} className={`flex flex-col gap-2 p-10 justify-center items-center hover:bg-primary hover:text-white transition-all group ${isActiveClass===index ? "bg-primary text-white group" : "" }`} 
-                onClick={()=>setIsActiveClass(index)}
+                <div key={index} className={`flex flex-col gap-2 p-10 justify-center items-center cursor-pointer hover:bg-primary hover:text-white transition-all group ${isActiveClass===index ? "bg-primary text-white group" : "" }`} 
+                onClick={()=> {setIsActiveClass(index); navigate(`/schedule/${item._id}`)}}
                 >
                   <p className={`text-lg py-1 px-5 transition-all 
                   ${isActiveClass === index ? "bg-white text-black" : "bg-black text-white group-hover:bg-white group-hover:text-black"}`}>
@@ -89,8 +93,3 @@ export default Classes
 
 
 
-// Convert grouped classes into an array of arrays
-// const result = Object.keys(groupedClasses).map(date => ({
-//   date,
-//   classes: groupedClasses[date],
-// }));

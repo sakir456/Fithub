@@ -229,14 +229,14 @@ const generateWorkOutPlan = async(ws, data)=> {
             stream: true,
         });
 
-        // Process the stream and send data to the client in real-time
+        //  sending data to the client in real-time
         for await (const chunk of stream) {
             const content = chunk.choices[0]?.delta?.content || "";
 
             if (content) {
-                // Send each part of the content (word-by-word or line-by-line)
+                // Send each part of the content 
                 ws.send(content);
-                await new Promise(resolve => setTimeout(resolve, 100)); // Add delay to simulate typing effect
+                await new Promise(resolve => setTimeout(resolve, 100)); // wait for 100 ms before next iteration 
             }
         }
   } catch (error) {

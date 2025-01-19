@@ -57,7 +57,7 @@ const submitHandler = async(e)=> {
     </div>
     <div className="flex flex-col gap-1.5  w-full text-sm">
      <span className="font-medium">Email</span>
-    <input type="email" placeholder="Enter email" value={email} onChange={(e)=>setEmail(e.target.value)} className="px-3 py-3 border  w-full text-sm outline-none focus:border-primary"/>
+    <input type="email" placeholder="Enter email" value={email} onChange={(e)=>setEmail(e.target.value)} className="px-3 py-3 border  w-full text-sm outline-none  focus:border-primary"/>
    </div>
    </div>
    <div className="flex flex-col gap-1.5  w-full text-sm">

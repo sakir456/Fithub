@@ -30,7 +30,7 @@ const WorkOutForm = () => {
             navigate("/login")
           }
           setWorkOutPlan("")
-        if(gender === "Select Gender" || fitnessLevel === "Select Fitness Level" ){
+        if(!age || gender === "Select Gender" || !height || !weight ||   fitnessLevel === "Select Fitness Level" || !fitnessGoals  ){
             return toast.warn("Please select all fields")
         }
         const ws = new WebSocket(`${import.meta.env.VITE_BACKEND_URL.replace('http', 'ws')}`);
@@ -40,13 +40,14 @@ const WorkOutForm = () => {
 
         // Send data over WebSocket after connection is established
         const workoutRequestData = {
-            age,
+             age,
             gender,
             height,
             weight,
             fitnessLevel,
             fitnessGoals,
-            medicalConditions
+            medicalConditions,
+            token
         };
 
         ws.send(JSON.stringify(workoutRequestData));  // Send workout plan request via WebSocket
@@ -133,7 +134,7 @@ const WorkOutForm = () => {
      </form>
      {workOutPlan && (
       <div className="  flex flex-col gap-1.5  w-full mt-10   text-sm max-w-4xl font-barlow">
-      <span className="font-medium">WorkOut Plan:</span>
+      <span className="font-medium">Workout Plan:</span>
      <textarea type="text" value={workOutPlan}  placeholder="WorkOut Plan"  className="border shadow-lg   p-5 py-10 max-sm:py-5 outline-none focus:border-primary overflow-y-scroll" rows={40} readOnly/>
    </div>
     )}

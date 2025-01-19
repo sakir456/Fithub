@@ -14,6 +14,7 @@ import ContactUs from './pages/ContactUs'
 import PageNotFound from './pages/PageNotFound'
 import {GoogleOAuthProvider} from '@react-oauth/google'
 import ScrollToTop from './components/ScrollToTop';
+import EnrollClass from './pages/EnrollClass';
 
 
 
@@ -37,6 +38,7 @@ function App() {
     <Routes>
     <Route path='/' element={<Home />} />
     <Route path='/schedule' element={<Schedule />} />
+    <Route path='/schedule/:classId' element={<EnrollClass />} />
     <Route path='/all-trainers' element={<AllTrainers />} />
     <Route path='/workout-plans' element={<WorkoutPlans />} />
     <Route path='/about' element={<AboutUs />} />
