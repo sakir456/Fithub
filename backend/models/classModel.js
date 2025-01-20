@@ -28,6 +28,10 @@ const classSchema = new mongoose.Schema({
     isCompleted: {
         type: Boolean,
         default: false 
+    },
+    users_enrolled: {
+        type: Array,
+        default:[]
     }
 })
 

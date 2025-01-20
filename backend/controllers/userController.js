@@ -167,6 +167,8 @@ const getClasses = async(req,res) => {
                 $lte: endDate
             }
         }).sort({ date:1 });
+
+        
      res.json({success:true, classes})
     } catch (error) {
         console.log(error)
@@ -245,9 +247,42 @@ const generateWorkOutPlan = async(ws, data)=> {
     }
 }
 
+//API for enrolling user to gym class
+const enrollGymClass = async(req, res)=> {
+    try {
+        const {userId, classId} = req.body;
+        const gymClass = await classModel.findById(classId)
+
+        if(!gymClass){
+            return res.json({success:false, message:"Class Not Found"})
+        }
+
+        let users_enrolled = gymClass.users_enrolled
+
+        
+        if(users_enrolled.includes(userId)){
+            return res.json({success:false, message: "You  Already enrolled in   same class"})
+        }
+
+        const user = await userModel.findById(userId)
+       if(user){
+         users_enrolled.push(userId)
+       }
+
+       await gymClass.save()
+
+       res.json({success:true, message:" Enrolled Successfully"})
 
 
-export { googleLogin, registerUser, signInUser, getProfile, updateProfile, getClasses, saveQuery, generateWorkOutPlan }
+    } catch (error) {
+        console.log(error)
+        res.json({sucess:false, message:error.message})
+    }
+   }
+
+
+
+export { googleLogin, registerUser, signInUser, getProfile, updateProfile, getClasses, saveQuery, generateWorkOutPlan, enrollGymClass }
 
 
 

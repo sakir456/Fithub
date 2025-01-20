@@ -11,7 +11,7 @@ const EnrollClass = () => {
   const [classInfo, setClassInfo] = useState(null)
 
  const fetchClassInfo = async()=>{
-    const classInfo = classes.find(item => item._id ===classId)
+    const classInfo =  classes.find(item => item._id ===classId)
     setClassInfo(classInfo)
     console.log(classInfo)
   } 
@@ -27,7 +27,7 @@ useEffect(()=> {
       <div className="   w-full h-96 bg-[url('/src/assets/hero/hero2.png')] flex justify-center items-center ">
       <div className="text-white font-bold text-5xl max-sm:text-4xl font-teko ">Enroll For Class</div>
     </div>
-    <GymClass classInfo={classInfo}/>
+    <GymClass classInfo={classInfo} classId={classId}/>
     </div>
   )
 }

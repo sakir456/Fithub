@@ -108,10 +108,20 @@ const allTrainers = async(req,res)=> {
 }
 
 
-
+//API to add Class
 const addClass = async(req, res)=> {
 
   try {
+
+    // deleting older classes from database
+    const today = new Date()
+    today.setHours(0,0,0,0)
+
+     await classModel.deleteMany({
+      date: {
+        $lt: today
+      }
+    })
 
     const {date, timing, className, trainerName, trainerId} = req.body;
 
