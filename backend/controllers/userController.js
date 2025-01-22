@@ -280,9 +280,58 @@ const enrollGymClass = async(req, res)=> {
     }
    }
 
+   //API for get user Classes for frontend
+   const listClasses = async(req, res)=> {
+     try {
+          const {userId} = req.body
+          
+          const allclasses = await classModel.find({})
+          
+
+          const userClasses = allclasses.filter((item)=> item.users_enrolled.includes(userId))
+          
+          
+
+          res.json({success:true, userClasses})
+          
+     } catch (error) {
+        console.log(error)
+        res.json({success:false, message:error.message})
+     }
+   }
+
+   //API to cancel class for frontend
+   const cancelUserEnrollment = async(req, res)=> {
+      try {
+        const {userId, classId} = req.body;
+
+        const gymClass = await classModel.findById(classId)
+
+        if(!gymClass){
+            return res.json({success:false, message:"Class Not Found"})
+        }
+        
+        let users_enrolled = gymClass.users_enrolled
+
+        const updatedEnrolledUsers = users_enrolled.filter((item) => item !== userId)
+
+        gymClass.users_enrolled = updatedEnrolledUsers
+
+        await gymClass.save()
+
+        res.json({success:true, message:"Enrollment cancel Successfully"})
 
 
-export { googleLogin, registerUser, signInUser, getProfile, updateProfile, getClasses, saveQuery, generateWorkOutPlan, enrollGymClass }
+      } catch (error) {
+        console.log(error)
+        res.json({success:false, message:error.message})
+      }
+   }
 
 
 
+export { googleLogin, registerUser, signInUser, getProfile, updateProfile, getClasses, saveQuery, generateWorkOutPlan, enrollGymClass, listClasses, cancelUserEnrollment }
+
+
+
+         

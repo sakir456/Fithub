@@ -13,6 +13,19 @@ const AppContextProvider = (props) => {
   const [classes, setClasses] = useState([]);
   const [trainers, setTrainers] = useState([])
 
+  const monthsofYear = ["Jan","Feb","Mar","Apr","May","June","July","Aug","Sept","Oct","Nov","Dec"]
+  const daysOfWeek = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+
+  const extractDateandDay = (date)=> {
+    const newDate = new Date(date)
+    const day = newDate.getDate()
+    const month = monthsofYear[newDate.getMonth()]  
+    const fullYear = newDate.getFullYear()
+    const dayOfWeek =  daysOfWeek[ newDate.getDay()]
+    
+    return `${day} ${month} ${fullYear} - ${dayOfWeek} `
+  }
+
   const loadUserProfileData = async () => {
     try {
       const { data } = await axios.get(backendUrl + "/api/user/get-profile", {
@@ -73,7 +86,8 @@ const AppContextProvider = (props) => {
     classes,
     setClasses,
     getTrainersData,
-    trainers, setTrainers
+    trainers, setTrainers,
+    extractDateandDay
   };
 
   useEffect(() => {

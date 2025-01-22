@@ -3,31 +3,31 @@ import SectionHeader from "./SectionHeader"
 import axios from "axios"
 import { AppContext } from "../context/AppContext"
 import { toast } from "react-toastify"
+import { useNavigate } from "react-router-dom"
 
 
 const GymClass = ({ classInfo, classId }) => {
 
-    const monthsofYear = ["Jan","Feb","Mar","Apr","May","June","July","Aug","Sept","Oct","Nov","Dec"]
-    const daysOfWeek = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","SaturdayY"]
-    const {backendUrl, token} = useContext(AppContext)
 
-    const extractDateandDay = (date)=> {
-        const newDate = new Date(date)
-        const day = newDate.getDate()
-        const month = monthsofYear[newDate.getMonth()]  
-        const fullYear = newDate.getFullYear()
-        const dayOfWeek =  daysOfWeek[ newDate.getDay()]
-        
-        return `${day} ${month} ${fullYear} - ${dayOfWeek} `
-      }
+   
+    const {backendUrl, token, extractDateandDay} = useContext(AppContext)
+
+    const navigate = useNavigate()
+
+    
 
       const submitHandler = async (e)=> {
         e.preventDefault()
+        if(!token){
+          toast.warn("Login to Enroll in Class")
+          navigate("/login")
+        }
          
         try {
             const {data} = await axios.post(backendUrl + "/api/user/enrollgymclass", {classId}, {headers:{token}})
             if(data.success){
               toast.success(data.message)
+              navigate("/myclasses")
             } else{
               toast.error(data.message)
             }

@@ -77,6 +77,7 @@ const Navbar = () => {
                 <p 
                 onClick={()=>navigate("/my-profile")}
                 className="cursor-pointer hover:text-primary duration-300 ease-in-out" >My Profile</p>
+                <p onClick={()=>navigate("/myclasses")}  className="cursor-pointer hover:text-primary duration-300 ease-in-out">My Classes</p>
                 <p onClick={logOut} className="cursor-pointer hover:text-primary duration-300 ease-in-out">Logout</p>
               </div>
 
@@ -108,19 +109,13 @@ const Navbar = () => {
         <div className=" border border-gray-200 bg-white py-7 max-sm:py-5 px-7 max-sm:px-5 shadow-md text-gray-950">
           <ul className="flex flex-col gap-4 max-sm:gap-2">
           {
-            token ? (
+            token && (
                 <NavLink 
                 onClick={()=>setShowMenu(false)}
                  to="/my-profile">
               <li>My Profile</li>
             </NavLink>
-              ) : (
-                <NavLink
-                onClick={()=>setShowMenu(false)}
-                 to="login">
-              <li>Sign in/ Sign up</li>
-            </NavLink>
-              )
+              ) 
             }
 
             <NavLink
@@ -134,6 +129,15 @@ const Navbar = () => {
              to="/schedule">
               <li>Schedule</li>
             </NavLink>
+           
+           { token && (
+            <NavLink
+            onClick={()=>setShowMenu(false)}
+             to="/myclasses">
+              <li>My Classes</li>
+            </NavLink>
+           )}
+            
 
             <NavLink
             onClick={()=>setShowMenu(false)}
@@ -158,6 +162,22 @@ const Navbar = () => {
              to="/contact">
               <li>Contact</li>
             </NavLink>
+
+            {
+            token ? (
+                <NavLink 
+                onClick={()=>{setShowMenu(false); logOut()}}
+                 >
+              <li>Logout</li>
+            </NavLink>
+              ) : (
+                <NavLink
+                onClick={()=>setShowMenu(false)}
+                 to="/login">
+              <li>Sign in/ Sign up</li>
+            </NavLink>
+              )
+            }
 
            
           </ul>
