@@ -22,8 +22,8 @@ const TrainersList = () => {
       <div className=" w-full flex flex-wrap gap-4 pt-5 gap-y-6">
       {
         trainers.map((item, index) => (
-          <div className="  border border-red-200 rounded-xl max-w-56 max-h-80  overflow-scroll cursor-pointer group   " key={index}>
-            <img className="" src={item.image} alt=""/>
+          <div className="  border border-red-200 rounded-xl max-w-56 max-h-80  overflow-scroll  cursor-pointer group   " key={index}>
+            <img className="h-full w-full" src={item.image} alt=""/>
             <div className="p-4">
             <p className="text-neutral-800 text-lg font-medium">{item.name}</p>
             <p className="text-zinc-600 text-sm">{item.speciality}</p>

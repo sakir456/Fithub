@@ -162,24 +162,46 @@ const getQueries = async(req,res)=> {
 
 //API to Update User Query to Read
 const readQuery = async(req, res)=> {
-  const {queryId} = req.body;
-  const queryData = await queryModel.findById(queryId)
-  if(queryData){
-    await queryModel.findByIdAndUpdate(queryId, {isCompleted: true})
+  try {
+    const {queryId} = req.body;
+    const queryData = await queryModel.findById(queryId)
+    if(queryData){
+      await queryModel.findByIdAndUpdate(queryId, {isCompleted: true})
+    }
+    res.json({success:true, message:"Query Updated Successfully"})
+  } catch (error) {
+    console.log(error)
+      res.json({success:false, message:error.message})
   }
-  res.json({success:true, message:"Query Updated Successfully"})
+  
 } 
 
 //API to Update User Query to Unread
 const unReadQuery = async(req, res)=> {
-  const {queryId} = req.body;
-  const queryData = await queryModel.findById(queryId)
-  if(queryData){
-    await queryModel.findByIdAndUpdate(queryId, {isCompleted: false})
+  try {
+    const {queryId} = req.body;
+    const queryData = await queryModel.findById(queryId)
+    if(queryData){
+      await queryModel.findByIdAndUpdate(queryId, {isCompleted: false})
+    }
+    res.json({success:true, message:"Query Updated Successfully"})
+  } catch (error) {
+    console.log(error)
+    res.json({success:false, message:error.message})
   }
-  res.json({success:true, message:"Query Updated Successfully"})
+  
 } 
 
+const allClasses = async(req, res)=> {
+    try {
+      const classes = await classModel.find({}) 
+        res.json({success:true, classes})
+    } catch (error) {
+      console.log(error)
+      res.json({success:false, message:error.message})
+    }
+}
 
 
-export  {loginAdmin, addTrainer, allUsers, allTrainers,  addClass, getQueries, readQuery, unReadQuery}
+
+export  {loginAdmin, addTrainer, allUsers, allTrainers,  addClass, getQueries, readQuery, unReadQuery, allClasses}

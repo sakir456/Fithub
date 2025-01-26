@@ -36,6 +36,13 @@ const Sidebar = () => {
        </NavLink>
 
        <NavLink 
+       to={"/all-classes"}
+       className={({isActive})=> `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-72 ${isActive ? "bg-red-50 border-r-4 border-primary" : ""}`}>
+       <ClipboardList />
+       <p className="hidden md:block">Classes</p>
+       </NavLink>
+
+       <NavLink 
        to={"/addtrainer"}
        className={({isActive})=> `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-72 ${isActive ? "bg-red-50 border-r-4 border-primary" : ""}`}>
          <UserPlus />

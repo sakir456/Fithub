@@ -3,7 +3,7 @@ import { AdminContext } from "../../context/AdminContext"
 
 
 const MembersList = () => {
-  const {aToken, getAllUSers, users} = useContext(AdminContext)
+  const {aToken, getAllUsers, users} = useContext(AdminContext)
 
   const calculateAge = (dob)=> {
     const today = new Date()
@@ -16,7 +16,7 @@ const MembersList = () => {
 
   useEffect(()=> {
    if(aToken){
-    getAllUSers()
+    getAllUsers()
    }
   },[aToken])
 

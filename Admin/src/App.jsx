@@ -16,6 +16,7 @@ import TrainerClasses from './pages/Trainer/TrainerClasses';
 import TrainerProfile from './pages/Trainer/TrainerProfile';
 import UserQueries from './pages/Admin/UserQueries';
 import AddTrainer from './pages/Admin/AddTrainer';
+import AllClasses from './pages/Admin/AllClasses';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         <Route path='/admin-dashboard' element= {<><Dashboard/></>} />
         <Route path='/trainers' element= {<><TrainersList/></>} />
         <Route path='/members' element= {<><MembersList/></>} />
+        <Route path='/all-classes' element= {<><AllClasses/></>} />
         <Route path='/addtrainer' element= {<><AddTrainer/></>} />
         <Route path='/class-schedule' element= {<><AddClassSchedule/></>} />
         <Route path='/user-queries' element= {<><UserQueries/></>} />

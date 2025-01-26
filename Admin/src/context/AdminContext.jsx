@@ -1,4 +1,4 @@
-import { createContext,  useEffect,  useState } from "react";
+import { createContext,    useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -11,10 +11,11 @@ const AdminContextProvider = (props) => {
     const [trainers, setTrainers] = useState([])
     const [queries, setQueries] = useState([])
     const [users, setUsers] = useState([])
+    const [classes, setClasses] = useState([])
 
     const backendUrl = import.meta.env.VITE_BACKEND_URL
 
-    const getAllUSers = async()=> {6
+    const getAllUsers = async()=> {
         try {
             const {data} = await axios.post(backendUrl + "/api/admin/all-users", {}, {headers:{aToken}}) 
             if(data.success){
@@ -44,6 +45,22 @@ const AdminContextProvider = (props) => {
             toast.error(error.message)
         }
     }
+
+    const getAllClasses = async()=> {
+        try {
+              const {data} = await axios.post(backendUrl + "/api/admin/all-classes", {}, {headers:{aToken}})
+              if(data.success){
+                 setClasses(data.classes)
+                 console.log(data.classes)
+
+              } else{
+               toast.error(data.message)
+              }
+        } catch (error) {
+              console.log(error)
+              toast.error(error.message)
+        }
+      }
 
     const getQueries = async()=> {
         try {
@@ -94,11 +111,13 @@ const AdminContextProvider = (props) => {
         setAToken,
         getAllTrainers,
         trainers, setTrainers,
-        getAllUSers,
+        getAllUsers,
         users, setUsers,
         queries, setQueries,
         getQueries, 
-        readQuery, unReadQuery
+        readQuery, unReadQuery,
+        classes, setClasses,
+        getAllClasses
     }
 
    

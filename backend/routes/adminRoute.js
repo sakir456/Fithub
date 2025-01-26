@@ -1,5 +1,5 @@
 import express from "express"
-import { addClass, addTrainer, allTrainers, allUsers, getQueries, loginAdmin, readQuery, unReadQuery, } from "../controllers/adminController.js"
+import { addClass, addTrainer, allClasses, allTrainers, allUsers, getQueries, loginAdmin, readQuery, unReadQuery, } from "../controllers/adminController.js"
 import authAdmin from "../middlewares/authAdmin.js"
 import upload from "../middlewares/multer.js"
 
@@ -15,6 +15,8 @@ adminRouter.post("/add-class", authAdmin, addClass)
 adminRouter.get("/get-queries", authAdmin, getQueries)
 adminRouter.post("/read-query", authAdmin, readQuery)
 adminRouter.post("/unread-query", authAdmin, unReadQuery)
+adminRouter.post("/all-classes", authAdmin, allClasses)
+
 
 
 
