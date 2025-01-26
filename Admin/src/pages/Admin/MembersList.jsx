@@ -31,7 +31,7 @@ const MembersList = () => {
         <p>Age</p>
         <p>Gender</p>
         <p>Phone No.</p>
-        <p>Fees</p>
+        <p>PlanType</p>
       </div>
       {
         users.map((item,index)=> (
@@ -45,12 +45,12 @@ const MembersList = () => {
           <p>{calculateAge(item.dob)}</p>
           <p>{item.gender}</p>
           <p className="max-sm:hidden">{item.phone}</p>
-          {
-            item.fees ? (
-            <p className=" text-xs text-green-500 font-medium">Paid</p>
+           {
+            item.planType === "Not a Member" ? (
+            <p className=" text-xs text-red-400  font-medium">N/A</p>
         ) : 
-          <p className=" text-red-400 text-xs font-medium">Pending</p>
-        }
+          <p className="   text-xs text-green-500 font-medium">{item.planType}</p>
+        } 
           
 
           </div>

@@ -8,6 +8,7 @@ import OpenAI from "openai";
 import {v2 as cloudinary} from "cloudinary"
 import classModel from "../models/classModel.js";
 import queryModel from "../models/queryModel.js";
+import razorpay from "razorpay";
 
 
 // API to googleLogin
@@ -328,9 +329,55 @@ const enrollGymClass = async(req, res)=> {
       }
    }
 
+   const razorpayInstance = new razorpay({
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET,
+  });
 
 
-export { googleLogin, registerUser, signInUser, getProfile, updateProfile, getClasses, saveQuery, generateWorkOutPlan, enrollGymClass, listClasses, cancelUserEnrollment }
+// API to make payment for gym membership using razorpay
+   const paymentRazorPay  = async(req, res)=> {
+    try {
+         const {userId, planType} = req.body;
+         
+
+         //creating options for razorpay payment
+         const options = {
+            amount: planType === "Basic" ? 29.99 * 100 : planType === "Premium" ? 49.99 * 100 : 79.99 * 100,
+            currency: process.env.CURRENCY,
+             receipt: userId,
+             notes:{planType}
+         }
+         //creation of order
+         const order = await razorpayInstance.orders.create(options);
+         res.json({ success: true, order });
+
+
+    } catch (error) {
+        console.log(error);
+    res.json({ success: false, message: error.message });
+    }
+   }
+
+   //API to verify payment of razorpay
+   const verifyRazorpay = async(req, res)=> {
+    try {
+        const {razorpay_order_id} = req.body
+    const orderInfo = await razorpayInstance.orders.fetch(razorpay_order_id)
+    if(orderInfo.status === "paid"){
+        await userModel.findByIdAndUpdate(orderInfo.receipt,{planType: orderInfo.notes.planType})
+        res.json({success:true,message:"Payment Successfull"})
+    } else {
+      res.json({success:false,message:"Payment Failed"})
+    }
+    } catch (error) {
+        
+    }
+   }
+
+
+
+export { googleLogin, registerUser, signInUser, getProfile, updateProfile, getClasses, saveQuery, generateWorkOutPlan, enrollGymClass, listClasses, cancelUserEnrollment, paymentRazorPay, verifyRazorpay }
 
 
 

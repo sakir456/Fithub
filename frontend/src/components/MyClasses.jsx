@@ -50,14 +50,14 @@ const MyClasses = () => {
 
 
   return classes && (
-    <div className="">
+    <div className="min-h-screen">
         <div className="   w-full h-28 bg-[url('/src/assets/hero/hero2.png')] flex justify-center items-center ">
         </div>
         
         <div className=" m-5 ">
         <p className="mb-3 text-lg font-medium">My Classes</p>
         <div className="bg-white border  rounded text-sm ">
-        <div className="max-sm:hidden grid grid-cols-[0.5fr_1fr_1fr_2fr_2fr_1fr_1fr] gap-1    py-3 px-6 border-b">
+        <div className="max-sm:hidden grid grid-cols-[0.5fr_1fr_1fr_1.5fr_1.5fr_1fr_1fr] gap-1    py-3 px-6 border-b">
         <p>#</p>
         <p> Trainer Name</p>
         <p>ClassName</p>
@@ -68,17 +68,26 @@ const MyClasses = () => {
       </div>
       {
         classes.map((item, index)=> (
-          <div className=" flex flex-wrap justify-between max-sm:text-base max-sm:gap-5 sm:grid grid-cols-[0.5fr_1fr_1fr_2fr_2fr_1fr_1fr] gap-1 items-center text-gray-500  py-3 px-6 border-b hover:bg-gray-50" key={index}>
+          <div className=" flex flex-wrap justify-between max-sm:text-base max-sm:gap-5 sm:grid grid-cols-[0.5fr_1fr_1fr_1.5fr_1.5fr_1fr_1fr] gap-1 items-center text-gray-500  py-3 px-6 border-b hover:bg-gray-50" key={index}>
         <p className="max-sm:hidden ">{index + 1}</p>
         <p>{item.trainerName}</p>
         <p>{item.className}</p>
         <p>{extractDateandDay(item.date)}</p>
         <p>{item.timing}</p>
         <p>1 Hour</p>
-        
-        <p>
+
+        {
+            item.cancelled ? (
+            <p className="text-red-400  font-medium">Cancelled</p>
+        ) : item.isCompleted ? (
+          <p className="text-green-500  font-medium">Completed</p>
+        ) : (
+          <p>
           <button className=" px-4 max-sm:px-2 py-1 bg-red-500 hover:bg-red-600  text-white" onClick={()=> cancelUserClass(item._id)}>Cancel</button>
-        </p>
+        </p> 
+        
+        )
+          }
         
       </div>
 

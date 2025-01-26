@@ -84,7 +84,7 @@ const WorkOutForm = () => {
   return (
     <div className="px-6 pt-10 pb-20 font-teko flex  flex-col gap-2  items-center w-full text-indigo-950" >
     <SectionHeader title="Workout Plan" textColor="text-primary" bgColor="bg-primary" />
-    <p className=" flex flex-wrap lg:text-5xl sm:text-4xl text-3xl font-semibold uppercase text-center mt-2 max-sm:mx-2">Personalized workouts at your fingertips. </p>
+    <p className=" flex flex-wrap lg:text-5xl sm:text-4xl text-3xl font-semibold uppercase text-center mt-2 max-sm:mx-2">Achieve More with AI-Generated Fitness Plans. </p>
     <form onSubmit={submitHandler}  className=" flex flex-1  flex-col w-full max-w-4xl border shadow-lg p-5 py-10  mt-5  gap-7 font-barlow">
      <div className="flex md:flex-row flex-col  md:gap-5 gap-7 w-full">
      <div className="flex flex-col gap-1.5  w-full text-sm">

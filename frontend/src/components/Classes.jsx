@@ -48,10 +48,10 @@ const Classes = () => {
     <div className=" pt-5 pb-10  font-teko flex flex-col justify-center items-center  gap-2  text-indigo-950">
     <div className="flex flex-col justify-center items-center   sm:gap-5">
      <SectionHeader title="Class Time Schedule" textColor="text-primary" bgColor="bg-primary" />
-    <p className=" flex flex-wrap flex-col max-sm:text-center w-full md:font-bold font-semibold  lg:text-5xl sm:text-4xl text-3xl uppercase justify-center     ">Select the Perfect Class 
+    <p className=" flex flex-wrap flex-col max-sm:text-center w-full md:font-bold font-semibold  lg:text-5xl sm:text-4xl text-3xl uppercase justify-center     ">Choose a Perfect Class and 
 
     <br/> 
-    <span className="text-center"> For You Now</span>
+    <span className="text-center"> Click to Enroll</span>
      </p>
     </div>
     <div className="flex flex-col gap-14 mt-5  justify-center items-center">

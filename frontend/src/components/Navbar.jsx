@@ -50,18 +50,23 @@ const Navbar = () => {
                 <li className="cursor-pointer hover:text-primary duration-300 ease-in-out">Schedule</li>
               </NavLink>
 
-              <NavLink to="/all-trainers">
-                <li className="cursor-pointer hover:text-primary duration-300 ease-in-out">All Trainers</li>
-              </NavLink>
-
+             
               <NavLink to="/workout-plans">
                 <li className="cursor-pointer hover:text-primary duration-300 ease-in-out">Workout Plans</li>
               </NavLink>
 
+              <NavLink to="/membership-plans">
+                <li className="cursor-pointer hover:text-primary duration-300 ease-in-out">Membership Plans</li>
+              </NavLink>
+
+              <NavLink to="/all-trainers">
+                <li className="cursor-pointer hover:text-primary duration-300 ease-in-out">All Trainers</li>
+              </NavLink>
+
+
+              
               <NavLink to="/about">
-                <li 
-                
-                className="cursor-pointer hover:text-primary duration-300 ease-in-out">About</li>
+                <li  className="cursor-pointer hover:text-primary duration-300 ease-in-out">About</li>
               </NavLink>
 
               <NavLink to="/contact">
@@ -138,17 +143,23 @@ const Navbar = () => {
             </NavLink>
            )}
             
+          <NavLink
+            onClick={()=>setShowMenu(false)}
+             to="/workout-plans"> 
+              <li>Workout Plans</li>
+            </NavLink>
+
+            
+            <NavLink
+            onClick={()=>setShowMenu(false)}
+             to="/membership-plans"> 
+              <li>Membership Plans</li>
+            </NavLink>
 
             <NavLink
             onClick={()=>setShowMenu(false)}
              to="/all-trainers">
               <li>All Trainers</li>
-            </NavLink>
-
-            <NavLink
-            onClick={()=>setShowMenu(false)}
-             to="/workout-plans"> 
-              <li>Workout Plans</li>
             </NavLink>
 
             <NavLink

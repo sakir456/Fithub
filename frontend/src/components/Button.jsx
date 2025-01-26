@@ -12,7 +12,7 @@ const handleClick = () => {
   return (
     <button
     onClick={handleClick}
-    className={` relative  w-48 text-center py-4 mt-2.5 $ max-sm:text-center text-lg uppercase overflow-hidden  bg-primary group text-nowrap
+    className={` relative  w-48 text-center py-4 mt-2.5  max-sm:text-center text-lg uppercase overflow-hidden  bg-primary group text-nowrap
      ${visibility ? visibility : "block"}
      `}
   >

@@ -41,9 +41,9 @@ const userSchema = new mongoose.Schema({
         type:String,
         default:"000000000"
     },
-    fees: {
-      type:Boolean,
-      default: false
+    planType: {
+      type:String,
+      default: "Not a Member"
     }
 });
 

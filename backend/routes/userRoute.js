@@ -1,5 +1,5 @@
 import express from "express"
-import {   cancelUserEnrollment,  enrollGymClass, getClasses, getProfile, googleLogin, listClasses, registerUser, saveQuery, signInUser, updateProfile } from "../controllers/userController.js"
+import {   cancelUserEnrollment,  enrollGymClass, getClasses, getProfile, googleLogin, listClasses, paymentRazorPay, registerUser, saveQuery, signInUser, updateProfile, verifyRazorpay } from "../controllers/userController.js"
 import authUser from "../middlewares/authUser.js"
 import upload from "../middlewares/multer.js"
 
@@ -16,6 +16,8 @@ userRouter.post("/savequery", authUser, saveQuery)
 userRouter.post("/enrollgymclass", authUser, enrollGymClass)
 userRouter.get("/userclasses", authUser, listClasses)
 userRouter.post("/canceluserenrollment", authUser, cancelUserEnrollment)
+userRouter.post("/payment-razorpay", authUser, paymentRazorPay)
+userRouter.post("/verify-razorpay", authUser, verifyRazorpay)
 
 
 
