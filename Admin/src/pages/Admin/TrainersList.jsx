@@ -17,7 +17,7 @@ const TrainersList = () => {
 
 
   return trainers && (
-    <div className="m-5 max-h-[90vh] overflow-y-scroll">
+    <div className="m-5 max-sm:mx-0 max-sm:p-3  max-h-[90vh] overflow-y-scroll">
       <p className=" font-medium text-lg ">All Trainers</p>
       <div className=" w-full flex flex-wrap gap-4 pt-5 gap-y-6">
       {

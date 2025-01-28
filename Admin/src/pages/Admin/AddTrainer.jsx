@@ -74,9 +74,9 @@ const AddTrainer = () => {
 
 
   return (
-    <form onSubmit={onSubmitHandler} className="m-5 w-full">
+    <form onSubmit={onSubmitHandler} className="m-5 max-sm:mx-0 max-sm:p-3 w-full">
         <p className="font-medium text-lg mb-3">Add Trainer</p>
-        <div className="bg-white p-8 w-full max-w-4xl border rounded  max-h-[80vh] overflow-y-scroll ">
+        <div className="bg-white p-8 max-sm:p-4  max-w-4xl  border rounded  max-h-[80vh] overflow-y-scroll ">
         <div className="flex items-center gap-4  mb-8 text-gray-500  ">
             <label htmlFor="trainer-img">
                 <img src={trainerImg ? URL.createObjectURL(trainerImg) : "/src/assets/upload_area.svg"} className="w-16 bg-gray-100 rounded-full cursor-pointer "  alt=""/>

@@ -37,7 +37,7 @@ const UserQueries = () => {
 
   return (
     queries && (
-      <div className="w-full max-w-4xl  m-5">
+      <div className="w-full max-w-4xl  m-5 max-sm:mx-0 max-sm:p-3 ">
         <div className="flex max-sm:flex-col sm:justify-between">
           <p className="mb-3 text-lg font-medium">User Queries</p>
           <div className="flex  items-center px-2 max-sm:py-2 border rounded-md text-sm gap-1 text-gray-400 outline-double ">

@@ -98,7 +98,7 @@ const completeClass = async(req, res)=> {
             await classModel.findByIdAndUpdate(classId, {isCompleted: true})
             res.json({success:true, message: "Class Completed Successfully"})
         }  else {
-            res.json({success:false, message: "Mark failes"})
+            res.json({success:false, message: "Mark failed"})
         } 
     } catch (error) {
         console.log(error)

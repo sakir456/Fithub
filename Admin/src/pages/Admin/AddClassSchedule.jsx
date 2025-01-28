@@ -58,7 +58,7 @@ const AddClassSchedule = () => {
    },[aToken])
 
   return (
-    <form onSubmit={onSubmitHandler} className="m-5 w-full">
+    <form onSubmit={onSubmitHandler} className="m-5 max-sm:mx-0 max-sm:p-3 w-full ">
       <p className="font-medium text-lg mb-3">Add Class</p>
       <div className="bg-white p-8 w-full max-w-4xl border rounded  max-h-[80vh] overflow-y-scroll ">
         <div className=" flex flex-col lg:flex-row items-start gap-10 mb-6   text-gray-600 ">

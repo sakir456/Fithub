@@ -202,6 +202,82 @@ const allClasses = async(req, res)=> {
     }
 }
 
+//API to cancel Class for admin panel
+const cancelClass = async(req, res)=> {
+  try {
+      const {classId} = req.body;
+      const classData = await classModel.findById(classId)
+
+      if(classData){
+          await classModel.findByIdAndUpdate(classId, {cancelled:true})
+
+          res.json({success:true, message:"Class Cancelled Successfully"})
+      } else {
+          res.json({success:false, message:"Class Cancellation failed"})
+      }
+  } catch (error) {
+      console.log(error)
+      res.json({success:false, message:error.message})
+      
+  }
+}
+
+//API to complete class for admin panel
+const completeClass = async(req, res)=> {
+  try {
+      const { classId} = req.body;
+      const classData =  await classModel.findById(classId)
+
+      if(classData ){
+          await classModel.findByIdAndUpdate(classId, {isCompleted: true})
+          res.json({success:true, message: "Class Completed Successfully"})
+      }  else {
+          res.json({success:false, message: "Mark failed"})
+      } 
+  } catch (error) {
+      console.log(error)
+      res.json({success:false, message:error.message})
+  }
+}
+
+//API to get dashboard data for admin panel
+
+const adminDashboard = async(req,res)=> {
+  try {
+      
+  const classes = await classModel.find({})
+
+  let isCompleted = 0
+  let cancelled = 0
+
+ classes.map((item)=> {
+  if(item.isCompleted){
+      isCompleted+=1
+  } 
+
+  if(item.cancelled){
+      cancelled+=1
+  }
+ })
+
+ const dashData = {
+  totalClasses:classes.length,
+  isCompleted,
+  cancelled,
+  classes: classes.reverse().slice(0, 5)
+}
+
+res.json({success:true, dashData})
+
+  } catch (error) {
+      console.log(error)
+      res.json({success:false, message:error.message})
+  }
+  
+
+}
 
 
-export  {loginAdmin, addTrainer, allUsers, allTrainers,  addClass, getQueries, readQuery, unReadQuery, allClasses}
+
+
+export  {loginAdmin, addTrainer, allUsers, allTrainers,  addClass, getQueries, readQuery, unReadQuery, allClasses, cancelClass, completeClass, adminDashboard }

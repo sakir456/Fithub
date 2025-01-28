@@ -12,6 +12,7 @@ const AdminContextProvider = (props) => {
     const [queries, setQueries] = useState([])
     const [users, setUsers] = useState([])
     const [classes, setClasses] = useState([])
+    const [dashData, setDashData] = useState(false)
 
     const backendUrl = import.meta.env.VITE_BACKEND_URL
 
@@ -62,6 +63,41 @@ const AdminContextProvider = (props) => {
         }
       }
 
+      const cancelClass = async(classId)=> {
+        try {
+          const {data}  = await axios.post(backendUrl + "/api/admin/cancel-class", {classId}, {headers:{aToken}})
+          if(data.success){
+                toast.success(data.message)
+                getAllClasses()
+               
+          } else{
+                toast.error(data.message)
+          }
+        } catch (error) {
+                console.log(error)
+                toast.error(error.message)
+
+          
+        }
+}
+
+const completeClass = async(classId)=> {
+    try {
+            const {data}  = await axios.post(backendUrl  + "/api/admin/complete-class", {classId}, {headers:{aToken}})
+            if(data.success){
+                    toast.success(data.message)
+                    getAllClasses()
+                    
+            } else{
+                    toast.error(data.message)
+            }    
+    } catch (error) {
+           console.log(error)
+           toast.error(error.message) 
+    }
+    
+}
+
     const getQueries = async()=> {
         try {
             const {data}  = await axios.get(backendUrl + "/api/admin/get-queries", {headers:{aToken}})
@@ -106,6 +142,22 @@ const AdminContextProvider = (props) => {
         } 
     }
 
+    const getDashData  = async()=>{
+        try {
+          const {data} = await axios.get(backendUrl + "/api/admin/dashboard", {headers:{aToken}})
+          if(data.success){
+             setDashData(data.dashData)
+             console.log(data.dashData)
+          } else {
+            toast.error(data.message)
+          }
+        } catch(error){
+          console.log(error)
+          toast.error(error.message)
+        }
+  }
+  
+
     const value = {
        backendUrl,aToken,
         setAToken,
@@ -117,7 +169,10 @@ const AdminContextProvider = (props) => {
         getQueries, 
         readQuery, unReadQuery,
         classes, setClasses,
-        getAllClasses
+        getAllClasses,
+        cancelClass,completeClass,
+        dashData, setDashData,
+        getDashData 
     }
 
    
