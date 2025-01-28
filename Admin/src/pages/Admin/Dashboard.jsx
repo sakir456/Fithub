@@ -1,8 +1,9 @@
 import { useContext, useEffect } from "react"
 import { AdminContext } from "../../context/AdminContext"
+import LoadingSpinner from "../../components/LoadingSpinner"
 
 const Dashboard = () => {
-  const {getDashData, dashData, aToken, cancelClass, completeClass}  = useContext(AdminContext)
+  const {getDashData, dashData, aToken, cancelClass, completeClass, loading}  = useContext(AdminContext)
   
     const monthsofYear = ["Jan","Feb","Mar","Apr","May","June","July","Aug","Sept","Oct","Nov","Dec"]
   
@@ -20,8 +21,11 @@ const Dashboard = () => {
         }
     }, [aToken])
   
-  return dashData && (
-    <div className="m-5 max-sm:mx-0 max-sm:p-3 ">
+  return  (
+    loading ? (
+      <LoadingSpinner/>
+    ): dashData &&(
+    <div className="m-5 ">
    <div className="flex flex-wrap gap-3 ">
         <div className="flex items-center gap-2 bg-white p-4 min-w-52 rounded border-2 border-gray-100 cursor-pointer text-primary hover:scale-105 transition-all">
         <img className="w-12 " src="/src/assets/calendar.png" alt="Trainer img"/>
@@ -85,6 +89,7 @@ const Dashboard = () => {
       </div>
       
     </div>
+    )
   )
 }
 

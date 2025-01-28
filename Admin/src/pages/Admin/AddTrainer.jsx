@@ -2,12 +2,15 @@ import { useContext, useState } from "react"
 import { toast } from "react-toastify"
 import axios from "axios"
 import { AdminContext } from "../../context/AdminContext"
+import LoadingSpinner from "../../components/LoadingSpinner"
 
 
 const AddTrainer = () => {
-    const [trainerImg, setTrainerImg] = useState(false)
-    const [name, setName] = useState("")
-    const  [email, setEmail] = useState("")
+
+  const [loading, setLoading] = useState(false)
+  const [trainerImg, setTrainerImg] = useState(false)
+  const [name, setName] = useState("")
+  const  [email, setEmail] = useState("")
   const   [password, setPassword] = useState("")
   const   [experience, setExperience] = useState("1 Year")
   const   [salary, setSalary] = useState("")
@@ -23,7 +26,7 @@ const AddTrainer = () => {
 
   const onSubmitHandler = async(e) => {
     e.preventDefault()
-
+     setLoading(true)
     try {
         if(!trainerImg){
         return toast.error("Image not selected")
@@ -68,15 +71,20 @@ const AddTrainer = () => {
     } catch (error) {
         toast.error(error.message)
         console.log(error)
+    }finally{
+        setLoading(false)
     }
 
   }
 
 
   return (
-    <form onSubmit={onSubmitHandler} className="m-5 max-sm:mx-0 max-sm:p-3 w-full">
+    loading ? (
+        <LoadingSpinner/>
+    ) : (
+    <form onSubmit={onSubmitHandler} className="m-5  w-full">
         <p className="font-medium text-lg mb-3">Add Trainer</p>
-        <div className="bg-white p-8 max-sm:p-4  max-w-4xl  border rounded  max-h-[80vh] overflow-y-scroll ">
+        <div className="bg-white p-8 w-full max-w-4xl border rounded  max-h-[80vh] overflow-y-scroll ">
         <div className="flex items-center gap-4  mb-8 text-gray-500  ">
             <label htmlFor="trainer-img">
                 <img src={trainerImg ? URL.createObjectURL(trainerImg) : "/src/assets/upload_area.svg"} className="w-16 bg-gray-100 rounded-full cursor-pointer "  alt=""/>
@@ -156,6 +164,7 @@ const AddTrainer = () => {
           <button type="Submit" className="px-10 py-3 rounded-full bg-primary text-white ">Add Trainer</button>
         </div>
     </form>
+    )
   )
 }
 

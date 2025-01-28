@@ -61,7 +61,7 @@ const onSubmitHandler = async(event)=> {
     </div>
     <div className="w-full mt-1">
         <p>Password</p>
-        <input value={password} onChange={(e)=>setPassword(e.target.value)} className="w-full p-2 border border-[#DADADA] outline-none mt-1 bg-slate-100"  type="text" required/>
+        <input value={password} onChange={(e)=>setPassword(e.target.value)} className="w-full p-2 border border-[#DADADA] outline-none mt-1 bg-slate-100"  type="password" required/>
     </div>
     <button className="p-2 w-full bg-primary  text-white rounded-md mt-2.5" >Login</button>
     {

@@ -1,5 +1,6 @@
 import { useContext, useEffect } from "react"
 import { TrainerContext } from "../../context/TrainerContext"
+import LoadingSpinner from "../../components/LoadingSpinner"
 
 
 const TrainerDashboard = () => {
@@ -22,7 +23,10 @@ const TrainerDashboard = () => {
       }
   }, [tToken])
 
-  return dashData && (
+  return  (
+    !dashData ? (
+       <LoadingSpinner />
+    ) : (
     <div className="m-5">
       <div className="flex flex-wrap gap-3 ">
         <div className="flex items-center gap-2 bg-white p-4 min-w-52 rounded border-2 border-gray-100 cursor-pointer text-primary hover:scale-105 transition-all">
@@ -87,6 +91,7 @@ const TrainerDashboard = () => {
       </div>
 
     </div>
+  )
   )
 }
 

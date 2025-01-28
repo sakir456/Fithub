@@ -1,9 +1,10 @@
 import { useContext, useEffect } from "react"
 import { AdminContext } from "../../context/AdminContext"
+import LoadingSpinner from "../../components/LoadingSpinner"
 
 
 const TrainersList = () => {
- const {trainers, aToken, getAllTrainers} = useContext(AdminContext)
+ const {trainers, aToken, getAllTrainers, loading} = useContext(AdminContext)
 
 
 
@@ -16,8 +17,11 @@ const TrainersList = () => {
 
 
 
-  return trainers && (
-    <div className="m-5 max-sm:mx-0 max-sm:p-3  max-h-[90vh] overflow-y-scroll">
+  return  (
+    loading ? (
+      <LoadingSpinner/>
+    ) : trainers && (
+    <div className="m-5   max-h-[90vh] overflow-y-scroll">
       <p className=" font-medium text-lg ">All Trainers</p>
       <div className=" w-full flex flex-wrap gap-4 pt-5 gap-y-6">
       {
@@ -34,6 +38,7 @@ const TrainersList = () => {
       }
       </div>
     </div>
+    )
   )
 }
 

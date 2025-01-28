@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import { TrainerContext } from "../../context/TrainerContext"
 import axios from "axios"
 import { toast } from "react-toastify"
+import LoadingSpinner from "../../components/LoadingSpinner"
 
 
 const TrainerProfile = () => {
@@ -36,7 +37,10 @@ const TrainerProfile = () => {
 
  
 
-  return profileData && (
+  return  (
+    !profileData ? (
+      <LoadingSpinner />
+    ) : (
     <div className="">
     <div className="flex flex-col gap-4 m-5  ">
     <div className= "w-full sm:w-64 sm:h-64   rounded-lg overflow-y-scroll ">
@@ -110,6 +114,7 @@ const TrainerProfile = () => {
 
     </div>
     </div>
+    )
   )
 }
 

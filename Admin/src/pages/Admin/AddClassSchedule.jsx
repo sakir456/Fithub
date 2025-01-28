@@ -2,11 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import { AdminContext } from "../../context/AdminContext";
 import { toast } from "react-toastify";
 import axios from "axios";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 const AddClassSchedule = () => {
   const { trainers, backendUrl, aToken, getAllTrainers } = useContext(AdminContext);
 
-  
+  const [loading, setLoading] = useState(false)
   const [date, setDate] = useState("");
   const [timing, setTiming] = useState("7:00-8:00");
   const [className, setClassName] = useState("Weight Lifting");
@@ -28,7 +29,7 @@ const AddClassSchedule = () => {
     if (!date || trainerName === "Select Trainer") {
       return toast.warn("Please select all fields");
     }
-
+    setLoading(true)
     try {
       const { data } = await axios.post(
         backendUrl + "/api/admin/add-class",
@@ -48,6 +49,8 @@ const AddClassSchedule = () => {
     } catch (error) {
       toast.error(error.message);
       console.log(error);
+    }finally{
+      setLoading(false)
     }
   };
 
@@ -58,7 +61,10 @@ const AddClassSchedule = () => {
    },[aToken])
 
   return (
-    <form onSubmit={onSubmitHandler} className="m-5 max-sm:mx-0 max-sm:p-3 w-full ">
+    loading ? (
+      <LoadingSpinner/>
+    ) : (
+    <form onSubmit={onSubmitHandler} className="m-5 max-sm:mx-3 w-full ">
       <p className="font-medium text-lg mb-3">Add Class</p>
       <div className="bg-white p-8 w-full max-w-4xl border rounded  max-h-[80vh] overflow-y-scroll ">
         <div className=" flex flex-col lg:flex-row items-start gap-10 mb-6   text-gray-600 ">
@@ -126,6 +132,7 @@ const AddClassSchedule = () => {
         </button>
       </div>
     </form>
+    )
   );
 };
 

@@ -6,7 +6,8 @@ import { toast } from "react-toastify";
 export const AdminContext  = createContext()
 
 const AdminContextProvider = (props) => {
-
+     
+    const [loading, setLoading] = useState(false)
     const [aToken, setAToken] = useState(localStorage.getItem("aToken")? localStorage.getItem("aToken") : "")
     const [trainers, setTrainers] = useState([])
     const [queries, setQueries] = useState([])
@@ -17,6 +18,7 @@ const AdminContextProvider = (props) => {
     const backendUrl = import.meta.env.VITE_BACKEND_URL
 
     const getAllUsers = async()=> {
+        setLoading(true)
         try {
             const {data} = await axios.post(backendUrl + "/api/admin/all-users", {}, {headers:{aToken}}) 
             if(data.success){
@@ -28,11 +30,14 @@ const AdminContextProvider = (props) => {
         } catch (error) {
             console.log(error)
             toast.error(error.message)
+        }finally{
+            setLoading(false)
         }
         
     }
 
     const getAllTrainers = async()=> {
+        setLoading(true)
         try {
             const {data} = await axios.post(backendUrl  + "/api/admin/all-trainers", {}, {headers:{aToken}})
             if(data.success){
@@ -44,10 +49,13 @@ const AdminContextProvider = (props) => {
         } catch (error) {
             console.log(error)
             toast.error(error.message)
+        }finally{
+            setLoading(false)
         }
     }
 
     const getAllClasses = async()=> {
+        setLoading(true)
         try {
               const {data} = await axios.post(backendUrl + "/api/admin/all-classes", {}, {headers:{aToken}})
               if(data.success){
@@ -60,10 +68,13 @@ const AdminContextProvider = (props) => {
         } catch (error) {
               console.log(error)
               toast.error(error.message)
+        }finally{
+            setLoading(false)
         }
       }
 
       const cancelClass = async(classId)=> {
+        
         try {
           const {data}  = await axios.post(backendUrl + "/api/admin/cancel-class", {classId}, {headers:{aToken}})
           if(data.success){
@@ -82,6 +93,7 @@ const AdminContextProvider = (props) => {
 }
 
 const completeClass = async(classId)=> {
+    
     try {
             const {data}  = await axios.post(backendUrl  + "/api/admin/complete-class", {classId}, {headers:{aToken}})
             if(data.success){
@@ -99,6 +111,7 @@ const completeClass = async(classId)=> {
 }
 
     const getQueries = async()=> {
+        setLoading(true)
         try {
             const {data}  = await axios.get(backendUrl + "/api/admin/get-queries", {headers:{aToken}})
             if(data.success){
@@ -110,10 +123,13 @@ const completeClass = async(classId)=> {
         } catch (error) {
             console.log(error)
             toast.error(error.message)
+        }finally{
+            setLoading(false)
         }
     }
 
     const readQuery = async(queryId)=> {
+        
         try {
              const {data} = await axios.post(backendUrl + "/api/admin/read-query", {queryId}, {headers:{aToken}})
              if(data.success){
@@ -125,9 +141,10 @@ const completeClass = async(classId)=> {
         } catch (error) {
             console.log(error)
             toast.error(error.message)
-        } 
+        }
     }
     const unReadQuery = async(queryId)=> {
+        
         try {
              const {data} = await axios.post(backendUrl + "/api/admin/unread-query", {queryId}, {headers:{aToken}})
              if(data.success){
@@ -139,10 +156,11 @@ const completeClass = async(classId)=> {
         } catch (error) {
             console.log(error)
             toast.error(error.message)
-        } 
+        }
     }
 
     const getDashData  = async()=>{
+        setLoading(true)
         try {
           const {data} = await axios.get(backendUrl + "/api/admin/dashboard", {headers:{aToken}})
           if(data.success){
@@ -154,11 +172,14 @@ const completeClass = async(classId)=> {
         } catch(error){
           console.log(error)
           toast.error(error.message)
+        }finally{
+            setLoading(false)
         }
   }
   
 
     const value = {
+        loading, setLoading,
        backendUrl,aToken,
         setAToken,
         getAllTrainers,
