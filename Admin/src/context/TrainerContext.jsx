@@ -7,13 +7,15 @@ export const TrainerContext = createContext()
 const TrainerContextProvider = (props) => {
 
         const backendUrl = import.meta.env.VITE_BACKEND_URL
-
+        
+        const [loading, setLoading] = useState(false)
         const [tToken, setTToken] = useState(localStorage.getItem("tToken") ? localStorage.getItem("tToken"): "")
         const [profileData, setProfileData] = useState(false)
         const [classes, setClasses] = useState([])
         const [dashData, setDashData] = useState(false)
 
         const getProfileData = async()=> {
+                setLoading(true)
                 try {
                     const {data} =  await axios.get(backendUrl + "/api/trainer/profile", {headers:{tToken}})   
                     if(data.success){
@@ -25,10 +27,13 @@ const TrainerContextProvider = (props) => {
                 } catch (error) {
                    console.log(error)
                    toast.error(error.message)
+                }finally{
+                 setLoading(false)
                 }
         }
 
         const getClasses = async()=> {
+                setLoading(true)
           try {
                 const {data} = await axios.get(backendUrl + "/api/trainer/classes", {headers:{tToken}})
                 if(data.success){
@@ -41,7 +46,9 @@ const TrainerContextProvider = (props) => {
           } catch (error) {
                 console.log(error)
                 toast.error(error.message)
-          }
+           }finally{
+                setLoading(false)
+               }
         }
 
         const cancelClass = async(classId)=> {
@@ -80,6 +87,8 @@ const TrainerContextProvider = (props) => {
         }
 
         const getDashData  = async()=>{
+                setLoading(true)
+                
               try {
                 const {data} = await axios.get(backendUrl + "/api/trainer/dashboard", {headers:{tToken}})
                 if(data.success){
@@ -91,7 +100,9 @@ const TrainerContextProvider = (props) => {
               } catch(error){
                 console.log(error)
                 toast.error(error.message)
-              }
+              }finally{
+                setLoading(false)
+               }
         }
         
 
@@ -104,7 +115,8 @@ const TrainerContextProvider = (props) => {
                 classes, setClasses,
                 getClasses, cancelClass ,completeClass,
                 dashData, setDashData,
-                getDashData
+                getDashData, 
+                loading, setLoading
 
         }
 

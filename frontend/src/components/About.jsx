@@ -3,7 +3,7 @@ import SectionHeader from "./SectionHeader"
 
 const About = () => {
   return (
-    <div className=" xl:px-44 lg:px-36 md:px-28 xl:pt-44 px-5  py-10 text-indigo-950">
+    <div className=" xl:px-44 lg:px-36 md:px-28 xl:pt-44 px-5  mt-10  text-indigo-950">
         <div className="flex lg:flex-row  flex-col  items-center lg:gap-20 gap-10 max-sm:gap-5">
            <div className="lg:w-1/2 ">
             <img src="/src/assets/gallery/about.png"/>

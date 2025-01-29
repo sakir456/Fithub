@@ -25,10 +25,10 @@ const MembersList = () => {
     loading ? (
       <LoadingSpinner/>
     ) : users && (
-    <div className="w-full max-w-6xl m-5 max-sm:mx-3  ">
+    <div className="w-full max-w-6xl m-5">
     <p className="mb-3 text-lg font-medium">All Members</p>
     <div className="bg-white border  rounded text-sm max-h-[80vh] min-h-[50vh] overflow-y-scroll">
-      <div className="max-sm:hidden grid grid-cols-[0.5fr_2fr_2fr_1fr_1fr_1fr_1fr] gap-1    py-3 px-6 border-b ">
+      <div className="max-sm:hidden grid grid-cols-[0.5fr_1fr_2fr_1fr_1fr_1fr_1fr] gap-1  py-3 px-6 border-b">
         <p>#</p>
         <p> Name</p>
         <p>Email</p>
@@ -38,8 +38,8 @@ const MembersList = () => {
         <p>PlanType</p>
       </div>
       {
-        users.map((item,index)=> (
-          <div className="flex flex-wrap justify-between max-sm:text-base max-sm:gap-5 sm:grid grid-cols-[0.5fr_2fr_2fr_1fr_1fr_1fr_1fr] gap-1 items-center text-gray-500  py-3 px-6 border-b hover:bg-gray-50"  key={index}>
+        users.reverse().map((item,index)=> (
+          <div className="flex flex-wrap justify-between max-sm:text-base max-sm:gap-5 sm:grid grid-cols-[0.5fr_1fr_2fr_1fr_1fr_1fr_1fr] gap-1 items-center text-gray-500  py-3 px-6 border-b hover:bg-gray-50"  key={index}>
           <p  className="max-sm:hidden ">{index + 1}</p>
           <div className="flex items-center gap-1">
           <img className="w-8 rounded-full" src={item.image} alt=""/>

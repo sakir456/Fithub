@@ -1,42 +1,23 @@
 import { useContext, useEffect } from "react"
 import { TrainerContext } from "../../context/TrainerContext"
 import LoadingSpinner from "../../components/LoadingSpinner"
+import { AppContext } from "../../context/AppContext"
 
 
 
 const TrainerClasses = () => {
-  const {classes, getClasses, tToken,  cancelClass, completeClass} = useContext(TrainerContext)
-  const daysOfWeek = ["SUNDAY","MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY"]
-  const monthsofYear = ["Jan","Feb","Mar","Apr","May","June","July","Aug","Sept","Oct","Nov","Dec"]
-
-
+  const {classes, getClasses, tToken,  cancelClass, completeClass, loading} = useContext(TrainerContext)
+  const {extractDateandDay} = useContext(AppContext)
   
-
-
-const extractDateandDay = (dateISOString)=> {
-  const date = new Date(dateISOString)
-  const day = date.getDate()
-  const month = monthsofYear[date.getMonth()]  
-  const fullYear = date.getFullYear()
-  const dayOfWeek =  daysOfWeek[date.getDay()]
-
-  return `${day} ${month} ${fullYear} - ${dayOfWeek} `
-}
-
-
-
-
-
-
-  useEffect(()=> {
+ useEffect(()=> {
     if(tToken){
       getClasses()
     }
 },[tToken])
   return  (
-    !classes ? (
+    loading ? (
       <LoadingSpinner />
-    ) : (
+    ) : classes && (
     <div className="w-full max-w-6xl m-5">
     <p className="mb-3 text-lg font-medium">All Classes</p>
     <div className="bg-white border  rounded text-sm max-h-[80vh] min-h-[50vh] overflow-y-scroll">

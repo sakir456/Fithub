@@ -45,7 +45,7 @@ const Classes = () => {
  
     
   return classes && (
-    <div className=" pt-5 pb-10  font-teko flex flex-col justify-center items-center  gap-2  text-indigo-950">
+    <div className=" mt-10   font-teko flex flex-col justify-center items-center  gap-2  text-indigo-950">
     <div className="flex flex-col justify-center items-center   sm:gap-5">
      <SectionHeader title="Class Time Schedule" textColor="text-primary" bgColor="bg-primary" />
     <p className=" flex flex-wrap flex-col max-sm:text-center w-full md:font-bold font-semibold  lg:text-5xl sm:text-4xl text-3xl uppercase justify-center     ">Choose a Perfect Class and 
@@ -68,16 +68,18 @@ const Classes = () => {
           selectedClasses.length > 0 && (
             
               selectedClasses.map((item,index)=> (
+                !item.isCompleted && !item.cancelled &&(
                 <div key={index} className={`flex flex-col gap-2 p-10 justify-center items-center cursor-pointer hover:bg-primary hover:text-white transition-all group ${isActiveClass===index ? "bg-primary text-white group" : "" }`} 
                 onClick={()=> {setIsActiveClass(index); navigate(`/schedule/${item._id}`)}}
                 >
                   <p className={`text-lg py-1 px-5 transition-all 
-                  ${isActiveClass === index ? "bg-white text-black" : "bg-black text-white group-hover:bg-white group-hover:text-black"}`}>
+                  ${isActiveClass === index ? "bg-white text-indigo-950" : "bg-indigo-950 text-white group-hover:bg-white group-hover:text-indigo-950"}`}>
                   {item.timing}
                   </p>
                   <p className="text-3xl mt-2">{item.className}</p>
                   <p className="font-barlow mt-2 text-sm ">{item.trainerName}</p> 
                 </div>
+                )
               ))
             
           )

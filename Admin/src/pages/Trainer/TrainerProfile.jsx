@@ -7,10 +7,11 @@ import LoadingSpinner from "../../components/LoadingSpinner"
 
 const TrainerProfile = () => {
  const [isEdit, setIsEdit]  = useState(false)
- const {tToken, getProfileData, profileData, setProfileData, backendUrl} = useContext(TrainerContext)
+ const {tToken, getProfileData, profileData, setProfileData, backendUrl, loading, setLoading} = useContext(TrainerContext)
 
 
  const updateProfile = async()=> {
+  setLoading(true)
   try {
     const updateData = {
       address: profileData.address
@@ -26,7 +27,9 @@ const TrainerProfile = () => {
   } catch (error) {
     toast.error(error.message)
     console.log(error)
-  }
+  }finally{
+    setLoading(false)
+   }
  }
 
  useEffect(()=> {
@@ -38,9 +41,9 @@ const TrainerProfile = () => {
  
 
   return  (
-    !profileData ? (
+    loading ? (
       <LoadingSpinner />
-    ) : (
+    ) : profileData && (
     <div className="">
     <div className="flex flex-col gap-4 m-5  ">
     <div className= "w-full sm:w-64 sm:h-64   rounded-lg overflow-y-scroll ">

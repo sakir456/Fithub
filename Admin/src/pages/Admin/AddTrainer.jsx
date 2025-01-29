@@ -83,32 +83,32 @@ const AddTrainer = () => {
         <LoadingSpinner/>
     ) : (
     <form onSubmit={onSubmitHandler} className="m-5  w-full">
-        <p className="font-medium text-lg mb-3">Add Trainer</p>
-        <div className="bg-white p-8 w-full max-w-4xl border rounded  max-h-[80vh] overflow-y-scroll ">
-        <div className="flex items-center gap-4  mb-8 text-gray-500  ">
+        <p className="mb-3 text-lg font-medium">Add Trainer</p>
+        <div className="bg-white px-8 py-8 border rounded w-full max-w-4xl max-h-[80vh] overflow-y-scroll">
+        <div className="flex items-center gap-4 mb-8 text-gray-500">
             <label htmlFor="trainer-img">
-                <img src={trainerImg ? URL.createObjectURL(trainerImg) : "/src/assets/upload_area.svg"} className="w-16 bg-gray-100 rounded-full cursor-pointer "  alt=""/>
+                <img src={trainerImg ? URL.createObjectURL(trainerImg) : "/src/assets/upload_area.svg"} className="w-16 bg-gray-100 rounded-full cursor-pointer"  alt=""/>
             </label>
         <input onChange={(e)=> setTrainerImg(e.target.files[0])} type="file" id="trainer-img" hidden/>
             <p>Upload Trainer <br/> picture</p>
         </div>
-        <div className=" flex flex-col lg:flex-row items-start gap-10 mb-3   text-gray-600">
-        <div className=" w-full lg:flex-1 flex flex-col gap-3"> 
+        <div className=" flex flex-col lg:flex-row items-start gap-10 text-gray-600">
+        <div className=" w-full lg:flex-1 flex flex-col gap-4"> 
         <div className=" flex-1 flex flex-col gap-1 ">
             <p>Trainer Name</p>
-            <input value={name} onChange={(e)=> setName(e.target.value)} className="px-3 py-2 border rounded   " type="text" placeholder="Name" required />
+            <input value={name} onChange={(e)=> setName(e.target.value)} className="border rounded px-3 py-2" type="text" placeholder="Name" required />
         </div>
-        <div className=" flex-1 flex flex-col gap-1  ">
+        <div className=" flex-1 flex flex-col gap-1">
             <p> Email</p>
-            <input value={email} onChange={(e)=> setEmail(e.target.value)}  className="px-3 py-2 border rounded   " type="email" placeholder="Email" required />
+            <input value={email} onChange={(e)=> setEmail(e.target.value)}  className="border rounded px-3 py-2" type="email" placeholder="Email" required />
         </div>
-        <div className=" flex-1 flex flex-col gap-1 ">
+        <div className="flex-1 flex flex-col gap-1">
             <p>Password</p>
-            <input value={password} onChange={(e)=> setPassword(e.target.value)} className="px-3 py-2 border rounded   " type="password" placeholder="Password" required />
+            <input value={password} onChange={(e)=> setPassword(e.target.value)} className="border rounded px-3 py-2" type="password" placeholder="Password" required />
         </div>
-        <div className=" flex-1 flex flex-col gap-1 ">
+        <div className="flex-1 flex flex-col gap-1">
             <p>Experience</p>
-           <select value={experience} onChange={(e)=> setExperience(e.target.value)} className="px-3 py-2 border rounded">
+           <select value={experience} onChange={(e)=> setExperience(e.target.value)} className="border rounded px-3 py-2">
             <option value="1 Year">1 Year</option>
             <option value="2 Year">2 Year</option>
             <option value="3 Year">3 Year</option>
@@ -121,22 +121,22 @@ const AddTrainer = () => {
             <option value="10 Year">10 Year</option>
            </select>
         </div>
-        <div className=" flex-1 flex flex-col gap-1 ">
+        <div className="flex-1 flex flex-col gap-1">
             <p>Salary</p>
-            <input value={salary} onChange={(e)=> setSalary(e.target.value)} className="px-3 py-2 border rounded   " type="number" placeholder="Salary" required />
+            <input value={salary} onChange={(e)=> setSalary(e.target.value)} className="border rounded px-3 py-2" type="number" placeholder="Salary" required />
         </div>
         </div>
-        <div className="  w-full lg:flex-1 flex flex-col gap-3">
-        <div className=" flex-1 flex flex-col gap-1 ">
+        <div className="w-full lg:flex-1 flex flex-col gap-4">
+        <div className="flex-1 flex flex-col gap-1">
             <p>Gender</p>
-           <select value={gender} onChange={(e)=> setGender(e.target.value)} className="px-3 py-2 border rounded">
+           <select value={gender} onChange={(e)=> setGender(e.target.value)} className="border rounded px-3 py-2">
             <option value="Male">Male</option>
             <option value="Female">Female</option>
             </select>
         </div>
         <div className=" flex-1 flex flex-col gap-1 ">
             <p>Speciality</p>
-           <select value={speciality} onChange={(e)=> setSpeciality(e.target.value)} className="px-3 py-2 border rounded">
+           <select value={speciality} onChange={(e)=> setSpeciality(e.target.value)} className="border rounded px-3 py-2">
             <option value="Personal Trainer">Personal Trainer</option>
             <option value="Yoga Instructor">Yoga Instructor</option>
             <option value="Strength & Conditioning Coach">Strength & Conditioning Coach</option>
@@ -146,22 +146,22 @@ const AddTrainer = () => {
         </div>
         <div  className=" flex-1 flex flex-col gap-1 ">
             <p>Certifications</p>
-            <input value={certifications} onChange={(e)=> setCertifications(e.target.value)} className="px-3 py-2 border rounded   " type="text" placeholder="Certifications"  required/>
+            <input value={certifications} onChange={(e)=> setCertifications(e.target.value)} className="border rounded px-3 py-2   " type="text" placeholder="Certifications"  required/>
         </div>
 
         <div  className=" flex-1 flex flex-col gap-1 ">
             <p>Address</p>
-            <input value={address1} onChange={(e)=> setAddress1(e.target.value)} className="px-3 py-2 border rounded   " type="text" placeholder="address1" required />
-            <input value={address2} onChange={(e)=> setAddress2(e.target.value)} className="px-3 py-2 border rounded   " type="text" placeholder="address2" required />
+            <input value={address1} onChange={(e)=> setAddress1(e.target.value)} className="border rounded px-3 py-2" type="text" placeholder="address1" required />
+            <input value={address2} onChange={(e)=> setAddress2(e.target.value)} className="border rounded px-3 py-2" type="text" placeholder="address2" required />
         </div>
         </div>
 
         </div>
-        <div className=" flex flex-1 flex-col gap-1 mb-5">
-        <p>About Trainer</p>
-        <textarea value={about} onChange={(e)=> setAbout(e.target.value)} className=" px-3 py-2 border rounded " placeholder="write about Trainer" rows={5} required/>
+        <div className="">
+        <p className="mt-4 mb-2" >About Trainer</p>
+        <textarea value={about} onChange={(e)=> setAbout(e.target.value)} className=" w-full px-4 pt-2 border rounded " placeholder="write about Trainer" rows={5} required/>
         </div>
-          <button type="Submit" className="px-10 py-3 rounded-full bg-primary text-white ">Add Trainer</button>
+          <button type="Submit" className="bg-primary px-10 py-3 mt-4 text-white rounded-full">Add Trainer</button>
         </div>
     </form>
     )

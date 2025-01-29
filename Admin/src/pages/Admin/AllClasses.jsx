@@ -1,24 +1,13 @@
 import { useContext, useEffect } from "react"
 import { AdminContext } from "../../context/AdminContext"
 import LoadingSpinner from "../../components/LoadingSpinner"
+import { AppContext } from "../../context/AppContext"
 
 
 const AllClasses = () => {
   const {classes, aToken, getAllClasses, cancelClass, completeClass, loading} = useContext(AdminContext)
-  const daysOfWeek = ["SUNDAY","MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY"]
-  const monthsofYear = ["Jan","Feb","Mar","Apr","May","June","July","Aug","Sept","Oct","Nov","Dec"]
-
-  
-
-  const extractDateandDay = (dateISOString)=> {
-    const date = new Date(dateISOString)
-    const day = date.getDate()
-    const month = monthsofYear[date.getMonth()]  
-    const fullYear = date.getFullYear()
-    const dayOfWeek =  daysOfWeek[date.getDay()]
-  
-    return `${day} ${month} ${fullYear} - ${dayOfWeek} `
-  }
+  const {extractDateandDay} = useContext(AppContext)
+ 
   
   
   

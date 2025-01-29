@@ -6,7 +6,7 @@ const Services = () => {
   const navigate = useNavigate()
     
     return (
-        <div className="min-h-screen xl:px-48 md:py-48 md:px-32 lg:px-32 sm:px-28 max-sm:px-4 max-sm:py-16  px-9 py-16   my-5  bg-[url('/src/assets/gallery/section_bg01.png')] bg-fixed  bg-cover   bg-no-repeat font-teko flex  flex-col gap-24 justify-center   ">
+        <div className="min-h-screen xl:px-48 md:py-48 md:px-32 lg:px-32 sm:px-28 max-sm:px-4 max-sm:py-16  px-9 py-16   mt-16  bg-[url('/src/assets/gallery/section_bg01.png')] bg-fixed  bg-cover   bg-no-repeat font-teko flex  flex-col gap-24 justify-center   ">
           <div className="flex flex-col    gap-8 max-sm:gap-3">
           <SectionHeader title="Our Services For You" textColor="text-primary" bgColor="bg-primary" />
           <p className="flex flex-col flex-wrap  text-white justify-start font-bold md:text-5xl text-4xl max-sm:text-3xl uppercase  ">PUSH YOUR LIMITS FORWARD

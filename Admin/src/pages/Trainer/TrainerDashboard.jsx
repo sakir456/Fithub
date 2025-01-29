@@ -3,16 +3,19 @@ import { TrainerContext } from "../../context/TrainerContext"
 import LoadingSpinner from "../../components/LoadingSpinner"
 
 
+
 const TrainerDashboard = () => {
 
-  const {getDashData, dashData, tToken, cancelClass, completeClass}  = useContext(TrainerContext)
+  const {getDashData, dashData, tToken, cancelClass, completeClass, loading}  = useContext(TrainerContext)
+  
+
 
   const monthsofYear = ["Jan","Feb","Mar","Apr","May","June","July","Aug","Sept","Oct","Nov","Dec"]
 
-  const extractDate  = (dateISOString)=> {
-       const date = new Date(dateISOString)
-       const day = date.getDate()
-       const month = monthsofYear[date.getMonth()]
+  const extractDate  = (date)=> {
+       const newdate = new Date(date)
+       const day = newdate.getDate()
+       const month = monthsofYear[newdate.getMonth()]
        
        return `${day} ${month} `
   }
@@ -24,9 +27,9 @@ const TrainerDashboard = () => {
   }, [tToken])
 
   return  (
-    !dashData ? (
+    loading ? (
        <LoadingSpinner />
-    ) : (
+    ) : dashData && (
     <div className="m-5">
       <div className="flex flex-wrap gap-3 ">
         <div className="flex items-center gap-2 bg-white p-4 min-w-52 rounded border-2 border-gray-100 cursor-pointer text-primary hover:scale-105 transition-all">
