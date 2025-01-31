@@ -3,9 +3,11 @@ import { AdminContext } from "../context/AdminContext"
 import axios from "axios"
 import { toast } from "react-toastify"
 import { TrainerContext } from "../context/TrainerContext"
+import LoadingSpinner from "../components/LoadingSpinner"
 
 
 const Login = () => {
+  const [loading, setLoading] = useState(false)
     const [state,setState] = useState("Admin")
     const [email,setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -13,38 +15,50 @@ const Login = () => {
     const {setAToken, backendUrl } = useContext(AdminContext)
     const { setTToken } = useContext(TrainerContext)
 
-const onSubmitHandler = async(event)=> {
-    event.preventDefault()
-    try {
-        if(state === "Admin") {
-          const {data} = await axios.post(backendUrl + "/api/admin/login", {email,password})
-          if(data.success){
-            localStorage.setItem("aToken", data.token)
-            setAToken(data.token)
-            
-          } else {
-            toast.error(data.message)
+    const onSubmitHandler = async (event) => {
+      event.preventDefault();
+  
+      if (state === "Admin") {
+          setLoading(true);
+          try {
+              const { data } = await axios.post(backendUrl + "/api/admin/login", { email, password });
+  
+              if (data.success) {
+                  localStorage.setItem("aToken", data.token);
+                  setAToken(data.token);
+              } else {
+                  toast.error(data.message);
+              }
+          } catch (error) {
+              toast.error(error.message);
+          } finally {
+              setLoading(false);
           }
-        }  else {
-          const {data} = await axios.post(backendUrl + "/api/trainer/login", {email, password})
-          if(data.success){
-            localStorage.setItem("tToken", data.token)
-            setTToken(data.token)
-            } else{
-              toast.error(data.message)
-            }
-        }
-    } catch (error) {
-      
-         toast.error(error.message)
-    }
-
-}
-
+      } else {
+          setLoading(true);
+          try {
+              const { data } = await axios.post(backendUrl + "/api/trainer/login", { email, password });
+  
+              if (data.success) {
+                  localStorage.setItem("tToken", data.token);
+                  setTToken(data.token);
+              } else {
+                  toast.error(data.message);
+              }
+          } catch (error) {
+              toast.error(error.message);
+          } finally {
+              setLoading(false);
+          }
+      }
+  };
 
 
 
   return (
+    loading ? (
+      <LoadingSpinner/>
+    ) : (
     <div className=" h-screen flex items-center  justify-center   ">
     <form onSubmit={onSubmitHandler} className="flex flex-col min-w-[340px] sm:min-w-96 border rounded-xl  m-auto shadow-lg text-gray-600  text-sm">
     <div className="m-8">
@@ -76,6 +90,7 @@ const onSubmitHandler = async(event)=> {
      
     </form>
     </div>
+    )
   )
 }
 
