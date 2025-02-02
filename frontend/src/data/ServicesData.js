@@ -1,16 +1,16 @@
 const services = [
     {
-      image: "/public/assets/gallery/QualityEquipment.png",
+      image: "/assets/gallery/QualityEquipment.png",
       title: "Quality Equipment",
       description: "Experience top-of-the-line fitness machines and tools to enhance your workouts and achieve your goals efficiently.",
     },
     {
-      image: "/public/assets/gallery/HealthCaring.png",
+      image: "/assets/gallery/HealthCaring.png",
       title: "Health Caring",
       description: "Receive personalized care and guidance to ensure your health and fitness journey is safe and effective.",
     },
     {
-      image: "/public/assets/gallery/ProfessionalTrainers.png",
+      image: "/assets/gallery/ProfessionalTrainers.png",
       title: "Professional Trainers",
       description: "Train with certified professionals who provide expert advice, customized workout plans, and motivation to keep you on track.",
     },

@@ -6,7 +6,7 @@ const About = () => {
     <div className=" xl:px-44 lg:px-36 md:px-28 xl:pt-44 px-5  mt-10  text-indigo-950">
         <div className="flex lg:flex-row  flex-col  items-center lg:gap-20 gap-10 max-sm:gap-5">
            <div className="lg:w-1/2 ">
-            <img src="/public/assets/gallery/about.png"/>
+            <img src="/assets/gallery/about.png"/>
            </div>
            <div className="lg:w-1/2 flex justify-center  flex-col font-teko lg:pt-20    ">
            <SectionHeader title="About Fithub" textColor="text-primary" bgColor="bg-primary" />

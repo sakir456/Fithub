@@ -51,7 +51,7 @@ const MyClasses = () => {
 
   return classes && (
     <div className="min-h-screen">
-        <div className="   w-full h-28 bg-[url('/public/assets/hero/hero2.png')] flex justify-center items-center ">
+        <div className="   w-full h-28 bg-[url('/assets/hero/hero2.png')] flex justify-center items-center ">
         </div>
         
         <div className=" m-5 ">
