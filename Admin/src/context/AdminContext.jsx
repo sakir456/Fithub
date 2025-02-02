@@ -80,6 +80,7 @@ const AdminContextProvider = (props) => {
           if(data.success){
                 toast.success(data.message)
                 getAllClasses()
+                
                
           } else{
                 toast.error(data.message)
@@ -99,6 +100,7 @@ const completeClass = async(classId)=> {
             if(data.success){
                     toast.success(data.message)
                     getAllClasses()
+                    
                     
             } else{
                     toast.error(data.message)

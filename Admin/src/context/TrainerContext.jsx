@@ -57,6 +57,7 @@ const TrainerContextProvider = (props) => {
                   if(data.success){
                         toast.success(data.message)
                         getClasses()
+                        
                        
                   } else{
                         toast.error(data.message)
@@ -75,6 +76,7 @@ const TrainerContextProvider = (props) => {
                         if(data.success){
                                 toast.success(data.message)
                                 getClasses()
+                                
                                 
                         } else{
                                 toast.error(data.message)

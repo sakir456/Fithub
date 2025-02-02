@@ -87,7 +87,7 @@ const AddTrainer = () => {
         <div className="bg-white px-8 py-8 border rounded w-full max-w-4xl max-h-[80vh] overflow-y-scroll">
         <div className="flex items-center gap-4 mb-8 text-gray-500">
             <label htmlFor="trainer-img">
-                <img src={trainerImg ? URL.createObjectURL(trainerImg) : "/src/assets/upload_area.svg"} className="w-16 bg-gray-100 rounded-full cursor-pointer"  alt=""/>
+                <img src={trainerImg ? URL.createObjectURL(trainerImg) : "/assets/upload_area.svg"} className="w-16 bg-gray-100 rounded-full cursor-pointer"  alt=""/>
             </label>
         <input onChange={(e)=> setTrainerImg(e.target.files[0])} type="file" id="trainer-img" hidden/>
             <p>Upload Trainer <br/> picture</p>

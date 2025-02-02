@@ -24,25 +24,25 @@ const Dashboard = () => {
   return  (
     loading ? (
       <LoadingSpinner/>
-    ): dashData &&(
+    ): dashData &&(    
     <div className="m-5 ">
    <div className="flex flex-wrap gap-3 ">
         <div className="flex items-center gap-2 bg-white p-4 min-w-52 rounded border-2 border-gray-100 cursor-pointer text-primary hover:scale-105 transition-all">
-        <img className="w-12 " src="/src/assets/calendar.png" alt="Trainer img"/>
+        <img className="w-12 " src="/assets/calendar.png" alt="Trainer img"/>
         <div className='flex flex-col justify-center ml-2 text-gray-500 '>
           <p className='text-xl font-semibold text-gray-600'>{dashData.totalClasses}</p>
           <p className='text-gray-400'>Total Classes</p>
         </div>
         </div>
         <div className="flex items-center gap-2 bg-white p-4 min-w-52 rounded border-2 border-gray-100 cursor-pointer text-primary hover:scale-105 transition-all">
-        <img className="w-12 " src="/src/assets/badge.png" alt="Trainer img"/>
+        <img className="w-12 " src="/assets/badge.png" alt="Trainer img"/>
         <div className='flex flex-col justify-center ml-2 text-gray-500 '>
           <p className='text-xl font-semibold text-gray-600'>{dashData.isCompleted}</p>
           <p className='text-gray-400'>Completed</p>
         </div>
         </div>
        <div className="flex items-center gap-2 bg-white p-4 min-w-52 rounded border-2 border-gray-100 cursor-pointer text-primary hover:scale-105 transition-all">
-        <img className="w-12 " src="/src/assets/cross.png" alt="Trainer img"/>
+        <img className="w-12 " src="/assets/cross.png" alt="Trainer img"/>
         <div className='flex flex-col justify-center ml-2 text-gray-500 '>
           <p className='text-xl font-semibold text-gray-600'>{dashData.cancelled}</p>
           <p className='text-gray-400'>Cancelled</p>
@@ -52,7 +52,7 @@ const Dashboard = () => {
 
       <div className="bg-white mt-10">
       <div className="flex items-center gap-2.5 p-4 rounded-t border ">
-        <img className="w-7" src="/src/assets/classList.png"/>
+        <img className="w-7" src="/assets/classList.png"/>
         <p className="font-semibold">Upcoming Classes</p>
       </div>
       <div className="pt-4 border border-t-0">
@@ -74,8 +74,8 @@ const Dashboard = () => {
           <p className="text-green-500 text-xs font-medium">Completed</p>
         ) : (
           <div className="flex">
-          <img onClick={() => cancelClass(item._id)} className="w-10 cursor-pointer"  src="./src/assets/cancel_icon.svg" alt="" />
-          <img onClick={()=> completeClass(item._id)}  className="w-10 cursor-pointer"  src="./src/assets/tick_icon.svg" alt=""/>
+          <img onClick={() => cancelClass(item._id)} className="w-10 cursor-pointer"  src="/assets/cancel_icon.svg" alt="" />
+          <img onClick={()=> completeClass(item._id)}  className="w-10 cursor-pointer"  src="/assets/tick_icon.svg" alt=""/>
           </div>
         
         )

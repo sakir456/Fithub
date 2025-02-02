@@ -343,7 +343,7 @@ const enrollGymClass = async(req, res)=> {
 
          //creating options for razorpay payment
          const options = {
-            amount: planType === "Basic" ? 29.99 * 100 : planType === "Premium" ? 49.99 * 100 : 79.99 * 100,
+            amount: planType === "Basic" ? 29.99 * 100 : planType === "Premium" ? 49.99 * 100 : planType === "Elite" ? 79.99 * 100 : "",
             currency: process.env.CURRENCY,
              receipt: userId,
              notes:{planType}

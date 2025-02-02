@@ -100,7 +100,7 @@ const Navbar = () => {
           >
             <img
               className="w-7 h-7 max-sm:h-6 max-sm:w-6"
-              src="/src/assets/elements/horizontal-bars.png"
+              src="/assets/horizontal-bars.png"
             />
           </button>
         </div>

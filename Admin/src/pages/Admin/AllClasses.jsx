@@ -49,8 +49,8 @@ const AllClasses = () => {
           <p className="text-green-500 text-xs font-medium">Completed</p>
         ) : (
           <div className="flex">
-          <img  className="w-10 cursor-pointer"  src="./src/assets/cancel_icon.svg" alt="" onClick={()=> cancelClass(item._id)} />
-          <img   className="w-10 cursor-pointer"  src="./src/assets/tick_icon.svg" alt="" onClick={()=> completeClass(item._id)}/>
+          <img  className="w-10 cursor-pointer"  src="/assets/cancel_icon.svg" alt="" onClick={()=> cancelClass(item._id)} />
+          <img   className="w-10 cursor-pointer"  src="/assets/tick_icon.svg" alt="" onClick={()=> completeClass(item._id)}/>
           </div>
         
         )
