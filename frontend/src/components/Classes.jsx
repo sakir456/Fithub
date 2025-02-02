@@ -2,11 +2,14 @@ import { useContext, useEffect, useState } from "react"
 import { AppContext } from "../context/AppContext"
 import SectionHeader from "./SectionHeader"
 import {useNavigate} from "react-router-dom"
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
 
 
 const Classes = () => {
 
-  const {classes} = useContext(AppContext)
+  const {classes,loading} = useContext(AppContext)
   const daysOfWeek = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
 
   const [isActive, setIsActive]  = useState(null)
@@ -55,16 +58,35 @@ const Classes = () => {
      </p>
     </div>
     <div className="flex flex-col gap-14 mt-5  justify-center items-center">
-      <div className="flex flex-wrap justify-center items-center gap-4 text-2xl font-medium   ">
-        {
+      <div className="flex flex-wrap justify-center items-center gap-4 text-2xl font-medium">
+        { loading ? (
+          Array(7).fill(0).map((_, index) => (
+            <div key={index} className="px-7 py-3 border border-gray-200">
+                <Skeleton  width={100} height={30} />
+                </div>
+              ))
+        ) : (
           Object.keys(groupedClasses).map((date,index)=> (
             <p  key={index} className={`px-7 py-3 cursor-pointer transition-all ${isActive===index ? "bg-primary text-white" : "" }`} 
             onClick={()=> {setIsActive(index); setTimeout(() => setSelectedClasses(groupedClasses[date]), 200);}}>{extractDay(date)}</p>
-          ))
+          )))
         }
       </div>
       <div className="flex flex-wrap justify-center items-center gap-4">
         {
+          loading ? (
+            Array(5)
+                .fill(0)
+                .map((_, index) => (
+                  <div
+                    key={index}
+                    className="flex flex-col gap-2 p-10 justify-center items-center border border-gray-200"
+                  >
+                    <Skeleton width={140} height={25} />
+                    <Skeleton width={100} height={30} />
+                    <Skeleton width={80} height={20} />
+                  </div>
+                 ))) :
           selectedClasses.length > 0 && (
             
               selectedClasses.map((item,index)=> (

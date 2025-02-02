@@ -1,17 +1,27 @@
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import SectionHeader from "./SectionHeader";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const Trainers = () => {
-  const { trainers } = useContext(AppContext);
+  const { trainers,loading } = useContext(AppContext);
   return (
     <div className="px-6 mt-10   font-teko flex flex-col gap-2 items-center">
      
 
       <div className="   flex flex-wrap justify-center items-center gap-3 pt-5 gap-y-6">
-        {trainers.map((item, index) => (
+        { 
+          loading ? (
+           Array(trainers.length || 5).fill(0).map((_, index) => (
+              <div key={index} className="w-[280px] h-[330px] border border-gray-200 p-4">
+                <Skeleton height={280} />
+                <Skeleton width="80%" height={20} className="mt-2" />
+              </div>
+          ))): trainers && (
+          trainers.map((item, index) => (
           <div className=" " key={index}>
-            <div className=" relative group   border border-red-200   w-[280px] h-[330px]  overflow-hidden   cursor-pointer group ">
+            <div className=" relative group      w-[280px] h-[330px] border border-red-200  overflow-hidden   cursor-pointer group ">
               <img className="  " src={item.image} alt="" />
               <div
                 className="absolute   transform scale-y-0 
@@ -22,7 +32,7 @@ const Trainers = () => {
               </div>
             </div>
           </div>
-        ))}
+       ) ))}
       </div>
     </div>
   );

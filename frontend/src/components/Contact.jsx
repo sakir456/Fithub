@@ -4,11 +4,12 @@ import { toast } from "react-toastify"
 import {useNavigate} from "react-router-dom"
 import axios from "axios"
 import SectionHeader from "./SectionHeader"
+import LoadingSpinner from "./LoadingSpinner"
 
 
 const Contact = () => {
   const {token, backendUrl} = useContext(AppContext)
-
+  const [loading, setLoading] = useState(false)
 
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
@@ -24,7 +25,7 @@ const submitHandler = async(e)=> {
     toast.warn("Login to Contact Admin")
     navigate("/login")
   }
-
+  setLoading(true)
   try {
     const {data} = await axios.post(backendUrl + "/api/user/savequery", {name, email, subject, message}, {headers: {token}})
     if(data.success){
@@ -40,6 +41,8 @@ const submitHandler = async(e)=> {
      toast.error(error.message)
      console.log(error)
     
+  }finally{
+    setLoading(false)
   }
 
 }
@@ -69,7 +72,14 @@ const submitHandler = async(e)=> {
     <textarea type="text" placeholder="Enter Message" value={message} onChange={(e)=>setMessage(e.target.value)} className="px-3 py-3 border  w-full text-sm outline-none focus:border-primary" rows={8}/>
    </div>
    <div className="w-full flex items-start">
-    <button className="py-4 px-10  text-primary border border-primary font-teko tracking-widest hover:bg-primary hover:text-white transition-all">Submit</button>
+   {
+    loading ? (
+      <LoadingSpinner text="Submitting..."/>
+    ) : (
+      <button className="py-4 px-10  text-primary border border-primary font-teko tracking-widest hover:bg-primary hover:text-white transition-all">Submit</button>
+    )
+   }
+    
    </div>
      </form>
       

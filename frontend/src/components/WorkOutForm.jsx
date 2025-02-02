@@ -1,14 +1,17 @@
-import { useContext,  useState } from "react"
+import { useContext,  useState, useRef, useEffect  } from "react"
 import SectionHeader from "./SectionHeader"
 
 import { AppContext } from "../context/AppContext"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
+import LoadingSpinner from "./LoadingSpinner"
+
 
 
 const WorkOutForm = () => {
   const {token} = useContext(AppContext)
-
+    
+  const [loading, setLoading] = useState(false)
     const [age, setAge] = useState(0)
     const [gender, setGender] = useState("Select Gender")
     const [height, setHeight] = useState(0)
@@ -17,7 +20,13 @@ const WorkOutForm = () => {
     const [fitnessGoals, setFitnessGoals] = useState("")
     const [medicalConditions, setMedicalConditions] = useState("")
     const [workOutPlan, setWorkOutPlan] = useState("")
+    const [textAreaHeight, setTextAreaHeight] = useState("auto");
+
+    const textAreaRef = useRef(null);
+
     const navigate = useNavigate()
+
+    
 
 
     
@@ -33,6 +42,8 @@ const WorkOutForm = () => {
         if(!age || gender === "Select Gender" || !height || !weight ||   fitnessLevel === "Select Fitness Level" || !fitnessGoals  ){
             return toast.warn("Please select all fields")
         }
+
+        setLoading(true);
         const ws = new WebSocket(`${import.meta.env.VITE_BACKEND_URL.replace('http', 'ws')}`);
 
     ws.onopen = () => {
@@ -53,20 +64,25 @@ const WorkOutForm = () => {
         ws.send(JSON.stringify(workoutRequestData));  // Send workout plan request via WebSocket
     };
 
+    
+
     // Handle incoming messages
     ws.onmessage = (event) => {
         setWorkOutPlan(prevPlan => prevPlan + event.data); // Append new data to the workout plan
+        setLoading(false);
     };
 
     // Handle WebSocket error
     ws.onerror = (error) => {
         console.error('WebSocket error:', error);
         toast.error('Error connecting to server');
+        setLoading(false);
     };
 
     // Handle WebSocket connection close
     ws.onclose = () => {
         console.log('WebSocket connection closed');
+        setLoading(false);
     };
 
     // Reset form data
@@ -79,9 +95,17 @@ const WorkOutForm = () => {
     setMedicalConditions("");
     }
 
- 
+
+    useEffect(() => {
+      if (textAreaRef.current) {
+        // Reset the height to auto to get the correct scrollHeight
+        setTextAreaHeight("auto");
+        setTextAreaHeight(`${textAreaRef.current.scrollHeight}px`);
+      }
+    }, [workOutPlan]);
 
   return (
+     
     <div className="px-6 pt-10 pb-20 font-teko flex  flex-col gap-2  items-center w-full text-indigo-950" >
     <SectionHeader title="Workout Plan" textColor="text-primary" bgColor="bg-primary" />
     <p className=" flex flex-wrap lg:text-5xl sm:text-4xl text-3xl font-semibold uppercase text-center mt-2 max-sm:mx-2">Achieve More with AI-Generated Fitness Plans. </p>
@@ -129,17 +153,28 @@ const WorkOutForm = () => {
     <textarea type="text" value={medicalConditions} onChange={(e)=> setMedicalConditions(e.target.value)} placeholder="Medical Conditions (if any)"  className="px-3 py-3 border  w-full text-sm outline-none focus:border-primary" rows={3}/>
    </div>
    <div className="w-full flex items-start">
-    <button className="py-4 px-10  text-primary border border-primary font-teko tracking-widest hover:bg-primary hover:text-white transition-all">Generate</button>
+   {
+    loading ? (
+        <LoadingSpinner text="Generating..."/>
+    ) : (
+      <button className="py-4 px-10  text-primary border border-primary font-teko tracking-widest hover:bg-primary hover:text-white transition-all">Generate</button>
+    )
+   }
+
+   
+   
    </div>
      </form>
-     {workOutPlan && (
-      <div className="  flex flex-col gap-1.5  w-full mt-10   text-sm max-w-4xl font-barlow">
+     {
+     workOutPlan && (
+      <div   className="  flex flex-col gap-1.5  w-full mt-10   text-sm max-w-4xl font-barlow">
       <span className="font-medium">Workout Plan:</span>
-     <textarea type="text" value={workOutPlan}  placeholder="WorkOut Plan"  className="border shadow-lg   p-5 py-10 max-sm:py-5 outline-none focus:border-primary overflow-y-scroll" rows={40} readOnly/>
+     <textarea  ref={textAreaRef} type="text" value={workOutPlan}  placeholder="WorkOut Plan"  className="border shadow-lg   p-5 py-10 max-sm:py-5 outline-none focus:border-primary overflow-y-scroll" style={{ height: textAreaHeight }} readOnly/>
    </div>
     )}
 
     </div>
+    
   )
 }
 

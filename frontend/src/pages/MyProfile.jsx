@@ -40,7 +40,7 @@ const MyProfile = () => {
 
   return userData && (
     <div className="min-h-screen">
-      <div className="   w-full h-24 bg-[url('/src/assets/hero/hero2.png')] flex justify-center items-center ">
+      <div className="   w-full h-24 bg-[url('/public/assets/hero/hero2.png')] flex justify-center items-center ">
       </div>
       <div className="max-w-lg flex flex-col mx-5 my-5   gap-2 text-sm font-outfit">
       {

@@ -9,6 +9,7 @@ const AppContextProvider = (props) => {
   const [token, setToken] = useState(
     localStorage.getItem("token") ? localStorage.getItem("token") : false
   );
+  const [loading, setLoading] = useState(false)
   const [userData, setUserData] = useState(false);
   const [classes, setClasses] = useState([]);
   const [trainers, setTrainers] = useState([])
@@ -44,6 +45,7 @@ const AppContextProvider = (props) => {
   };
 
   const classesForWeek = async () => {
+    setLoading(true)
     try {
       const { data } = await axios.get(
         backendUrl + "/api/user/get-classes"
@@ -57,10 +59,13 @@ const AppContextProvider = (props) => {
     } catch (error) {
       console.log(error);
       toast.error(error.message);
+    }finally{
+      setLoading(false)
     }
   };
 
   const getTrainersData = async()=> {
+    setLoading(true)
     try {
      const {data} = await axios.get(backendUrl + "/api/trainer/list") 
      if(data.success){
@@ -72,6 +77,8 @@ const AppContextProvider = (props) => {
     } catch (error) {
       console.log(error)
       toast.error(error.message)
+    }finally{
+      setLoading(false)
     }
   }
 
@@ -87,7 +94,8 @@ const AppContextProvider = (props) => {
     setClasses,
     getTrainersData,
     trainers, setTrainers,
-    extractDateandDay
+    extractDateandDay,
+    loading, setLoading
   };
 
   useEffect(() => {
