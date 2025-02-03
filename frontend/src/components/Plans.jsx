@@ -75,16 +75,16 @@ const Plans = () => {
             <p className="font-bold text-2xl">{item.planType}</p>
             <p className="font-bold text-3xl text-primary flex  items-end">
               ${item.amount}
-              <p className="text-base font-normal text-indigo-950 ">/month</p>
+              <span className="text-base font-normal text-indigo-950 ">/month</span>
             </p>
             <p className="font-barlow mt-4  ">{item.description}</p>
             <p className=" font-semibold text-lg mt-2">Features:</p>
             <div className="flex flex-col gap-2">
               {item.features.map((item, index) => (
-                <p key={index} className="flex gap-2  ">
+                <span key={index} className="flex gap-2  ">
                   <p className=" text-primary">✓</p>
                   {item}
-                </p>
+                </span>
               ))}
             </div>
 

@@ -339,11 +339,24 @@ const enrollGymClass = async(req, res)=> {
    const paymentRazorPay  = async(req, res)=> {
     try {
          const {userId, planType} = req.body;
+
+         console.log(planType)
+
+         const planPrices = {
+            Basic: 29.99 * 100,
+            Premium: 49.99 * 100,
+            Elite: 79.99 * 100
+        };
+
+        
+        if (!planPrices[planType]) {
+            return res.json({ success: false, message: "Invalid plan type" });
+        }
          
 
          //creating options for razorpay payment
          const options = {
-            amount: planType === "Basic" ? 29.99 * 100 : planType === "Premium" ? 49.99 * 100 : planType === "Elite" ? 79.99 * 100 : "",
+            amount: planPrices[planType] ,
             currency: process.env.CURRENCY,
              receipt: userId,
              notes:{planType}

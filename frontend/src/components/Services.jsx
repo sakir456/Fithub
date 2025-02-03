@@ -26,7 +26,7 @@ const Services = () => {
                 className="absolute   transform scale-y-0 
               origin-bottom transition-transform duration-500 ease-in-out group-hover:scale-y-100 flex justify-center cursor-pointer  text-lg   bottom-0 w-full h-14 pt-3   bg-primary text-white "
               >
-              <p className="text-lg flex justify-center gap-3" onClick={()=>navigate("/contact")}>Contact Us <p>➔</p>  </p>
+              <p className="text-lg flex justify-center gap-3" onClick={()=>navigate("/contact")}>Contact Us <span>➔</span>  </p>
               </div>
                 </div>
               ))

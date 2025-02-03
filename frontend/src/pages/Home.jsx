@@ -28,9 +28,9 @@ const Home = () => {
               }`}
             >
               <hr className="border-none outline-none h-0.5 bg-primary w-10" />
-              <p className="text-2xl max-sm:text-center font-light uppercase tracking-wide">
+              <span className="text-2xl max-sm:text-center font-light uppercase tracking-wide">
                 With Patrick Potter
-              </p>
+              </span>
             </div>
             <div
               className={`text-wrap max-sm:text-center xl:text-7xl lg:text-6xl sm:text-5xl max-sm:text-3xl font-bold uppercase leading-tight transition-transform duration-700 ease-out delay-300 ${
