@@ -340,12 +340,14 @@ const enrollGymClass = async(req, res)=> {
     try {
          const {userId, planType} = req.body;
 
-         console.log(planType)
+        
+
+         
 
          const planPrices = {
-            Basic: 29.99 * 100,
-            Premium: 49.99 * 100,
-            Elite: 79.99 * 100
+            Basic: Math.round(29.99 * 100),
+            Premium: Math.round(49.99 * 100),
+            Elite: Math.round(79.99 * 100)
         };
 
         

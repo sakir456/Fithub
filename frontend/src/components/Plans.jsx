@@ -41,6 +41,7 @@ const Plans = () => {
   };
 
   const paymentRazorPay = async (planType) => {
+    
     try {
       const { data } = await axios.post(
         backendUrl + "/api/user/payment-razorpay",
@@ -48,6 +49,7 @@ const Plans = () => {
         { headers: { token } }
       );
       if (data.success) {
+       
         initPay(data.order);
       }
     } catch (error) {

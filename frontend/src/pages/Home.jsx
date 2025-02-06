@@ -17,7 +17,7 @@ const Home = () => {
 
   return (
     <div className="">
-      <div className="min-h-screen  bg-[url('/assets/hero/h1_hero.png')] bg-fixed  bg-cover    bg-no-repeat font-teko flex items-center justify-center relative  ">
+      <div className="min-h-screen  bg-[url('/assets/hero/h1_hero.png')] max-sm:bg-[url('/assets/hero/h1_hero_mobile.jpg')] bg-fixed  bg-cover    bg-no-repeat font-teko flex items-center justify-center relative  ">
         <div className="w-full  md:pl-5  flex justify-around max-sm:justify-center  max-sm:px-2 items-center  ">
           <div className="w-1/2 max-sm:w-full flex flex-col max-sm:items-center xl:gap-8 sm:gap-6 max-sm:gap-3 text-white  overflow-hidden">
             <div
