@@ -329,6 +329,8 @@ const enrollGymClass = async(req, res)=> {
       }
    }
 
+   
+
    const razorpayInstance = new razorpay({
     key_id: process.env.RAZORPAY_KEY_ID,
     key_secret: process.env.RAZORPAY_KEY_SECRET,
@@ -339,12 +341,7 @@ const enrollGymClass = async(req, res)=> {
    const paymentRazorPay  = async(req, res)=> {
     try {
          const {userId, planType} = req.body;
-
-        
-
-         
-
-         const planPrices = {
+    const planPrices = {
             Basic: Math.round(29.99 * 100),
             Premium: Math.round(49.99 * 100),
             Elite: Math.round(79.99 * 100)
