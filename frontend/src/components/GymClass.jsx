@@ -21,6 +21,7 @@ const GymClass = ({ classInfo, classId }) => {
         if(!token){
           toast.warn("Login to Enroll in Class")
           navigate("/login")
+          return
         }
          
         try {

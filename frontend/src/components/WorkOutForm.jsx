@@ -37,6 +37,7 @@ const WorkOutForm = () => {
         if(!token){
             toast.warn("Login to Generate Workout Plan")
             navigate("/login")
+            return
           }
           setWorkOutPlan("")
         if(!age || gender === "Select Gender" || !height || !weight ||   fitnessLevel === "Select Fitness Level" || !fitnessGoals  ){
