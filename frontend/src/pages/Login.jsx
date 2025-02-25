@@ -79,7 +79,7 @@ const onSubmitHandler = async(event)=> {
   return (
     <div className="">
         <div>
-        <div className="   w-full h-28 bg-[url('/assets/hero/hero2.png')] flex justify-center items-center ">
+        <div className="   w-full h-28 bg-[url('https://res.cloudinary.com/dkmnkggev/image/upload/v1740476246/hero2_mhw5ji.webp')] flex justify-center items-center ">
         </div>
     <div className=" py-10 flex justify-center  ">
       <form onSubmit={onSubmitHandler} className=' flex flex-col gap-3 items-start p-8 m-4  w-[340px] sm:min-w-96 border rounded-xl text-zinc-600 text-sm shadow-lg'>

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom"
 const Footer = () => {
   const navigate = useNavigate()
   return (
-    <div className="min-h-screen flex   justify-center items-center    bg-[url('/assets/gallery/section_bg03.png')] mt-16 bg-fixed  bg-cover    bg-no-repeat font-barlow text-white">
+    <div className="min-h-screen flex   justify-center items-center    bg-[url('https://res.cloudinary.com/dkmnkggev/image/upload/v1740477627/section_bg03_pfqzlc.webp')] mt-16 bg-fixed  bg-cover    bg-no-repeat font-barlow text-white">
     <div className="w-full xl:max-w-6xl lg:max-w-5xl p-8  lg:p-0 max-sm:px-4   flex flex-col   lg:gap-32 gap-20 max-sm:gap-10 ">
     <div className="flex lg:flex-row flex-col gap-4 lg:gap-0 justify-between lg:justify-around ">
       <div>
