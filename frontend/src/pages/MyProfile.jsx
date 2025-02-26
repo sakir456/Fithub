@@ -2,16 +2,19 @@ import { useContext, useState } from "react"
 import { AppContext } from "../context/AppContext"
 import axios from "axios"
 import { toast } from "react-toastify"
+import PageLoader from "../components/PageLoader"
 
 
 const MyProfile = () => {
    const [isEdit, setIsEdit] = useState(false)
    const [image, setImage] = useState(false)
-
-   const{loadUserProfileData,userData, setUserData,backendUrl, token} = useContext(AppContext) 
+   
+   const{loadUserProfileData,userData, setUserData,backendUrl, token, loading, setLoading} = useContext(AppContext) 
 
 
    const updateUserProfileData = async()=> {
+
+    setLoading(true)
          try {
           const formData  = new FormData()
           formData.append("name", userData.name)
@@ -35,13 +38,20 @@ const MyProfile = () => {
          } catch (error) {
           console.log(error)
           toast.error(error.message)
-         }
+         }finally{
+          setLoading(false)
+      }
    }
 
-  return userData && (
+  return  (
     <div className="min-h-screen">
       <div className="   w-full h-24 bg-[url('https://res.cloudinary.com/dkmnkggev/image/upload/v1740476246/hero2_mhw5ji.webp')] flex justify-center items-center ">
       </div>
+
+      {
+        loading   ? (
+    <PageLoader/>
+  ) : userData && (
       <div className="max-w-lg flex flex-col mx-5 my-5   gap-2 text-sm font-outfit">
       {
       isEdit
@@ -134,8 +144,10 @@ const MyProfile = () => {
       
        
       </div>
+      )}
     </div>
-  )
+  
+)
 }
 
 export default MyProfile

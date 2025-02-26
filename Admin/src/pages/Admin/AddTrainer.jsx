@@ -7,7 +7,7 @@ import LoadingSpinner from "../../components/LoadingSpinner"
 
 const AddTrainer = () => {
 
-  const [loading, setLoading] = useState(false)
+  
   const [trainerImg, setTrainerImg] = useState(false)
   const [name, setName] = useState("")
   const  [email, setEmail] = useState("")
@@ -21,7 +21,7 @@ const AddTrainer = () => {
   const [address1, setAddress1] = useState("")
   const [address2, setAddress2] = useState("")
 
-  const {backendUrl,aToken}  = useContext(AdminContext)
+  const {backendUrl,aToken,loading, setLoading}  = useContext(AdminContext)
 
 
   const onSubmitHandler = async(e) => {

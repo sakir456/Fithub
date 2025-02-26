@@ -2,14 +2,16 @@ import axios from "axios"
 import { useContext, useEffect, useState } from "react"
 import { AppContext } from "../context/AppContext"
 import { toast } from "react-toastify"
+import PageLoader from "./PageLoader"
 
 
 const MyClasses = () => {
-     const {backendUrl, token,  extractDateandDay, } = useContext(AppContext)
+     const {backendUrl, token,  extractDateandDay, loading, setLoading } = useContext(AppContext)
 
      const [classes, setClasses] = useState([])
     
     const getUserClasses = async()=> {
+      setLoading(true)
         try {
             const {data} = await axios.get(backendUrl + "/api/user/userclasses", {headers: { token },})
             if(data.success){
@@ -22,10 +24,13 @@ const MyClasses = () => {
         } catch (error) {
             console.log(error);
             toast.error(error.message)
-        }
+        }finally{
+          setLoading(false)
+      }
     }
 
     const cancelUserClass = async(classId)=> {
+      setLoading(true)
       try {
           const {data} = await axios.post(backendUrl + "/api/user/canceluserenrollment", {classId}, {headers: {token}} )
           if(data.success){
@@ -38,7 +43,9 @@ const MyClasses = () => {
       } catch (error) {
         console.log(error);
         toast.error(error.message)
-      }
+      }finally{
+        setLoading(false)
+    }
         
     }
 
@@ -49,11 +56,13 @@ const MyClasses = () => {
     },[token])
 
 
-  return classes && (
+  return  (
     <div className="min-h-screen">
-        <div className="   w-full h-28 bg-[url('/assets/hero/hero2.png')] flex justify-center items-center ">
+        <div className="   w-full h-28 bg-[url('https://res.cloudinary.com/dkmnkggev/image/upload/v1740476246/hero2_mhw5ji.webp')] flex justify-center items-center ">
         </div>
-        
+    {loading ? 
+     <PageLoader />
+      : classes && (
         <div className=" m-5 ">
         <p className="mb-3 text-lg font-medium">My Classes</p>
         <div className="bg-white border  rounded text-sm ">
@@ -97,6 +106,7 @@ const MyClasses = () => {
         </div>
 
         </div>
+       ) }
         
     </div>
   )

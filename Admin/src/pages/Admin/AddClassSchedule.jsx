@@ -5,9 +5,9 @@ import axios from "axios";
 import LoadingSpinner from "../../components/LoadingSpinner";
 
 const AddClassSchedule = () => {
-  const { trainers, backendUrl, aToken, getAllTrainers } = useContext(AdminContext);
+  const { trainers, backendUrl, aToken, getAllTrainers,loading, setLoading } = useContext(AdminContext);
 
-  const [loading, setLoading] = useState(false)
+  
   const [date, setDate] = useState("");
   const [timing, setTiming] = useState("7:00am-8:00am");
   const [className, setClassName] = useState("Weight Lifting");

@@ -1,9 +1,10 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import SectionHeader from "./SectionHeader"
 import axios from "axios"
 import { AppContext } from "../context/AppContext"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
+import LoadingSpinner from "./LoadingSpinner"
 
 
 const GymClass = ({ classInfo, classId }) => {
@@ -11,6 +12,7 @@ const GymClass = ({ classInfo, classId }) => {
 
    
     const {backendUrl, token, extractDateandDay} = useContext(AppContext)
+    const [loading, setLoading] = useState(false)
 
     const navigate = useNavigate()
 
@@ -23,8 +25,9 @@ const GymClass = ({ classInfo, classId }) => {
           navigate("/login")
           return
         }
-         
-        try {
+
+        setLoading(true)
+         try {
             const {data} = await axios.post(backendUrl + "/api/user/enrollgymclass", {classId}, {headers:{token}})
             if(data.success){
               toast.success(data.message)
@@ -35,7 +38,9 @@ const GymClass = ({ classInfo, classId }) => {
         } catch (error) {
            console.log(error)
            toast.error(error.message)
-        }
+        }finally{
+          setLoading(false)
+      }
       }
       
   return classInfo &&  (
@@ -73,7 +78,12 @@ const GymClass = ({ classInfo, classId }) => {
     </div>
   </div>
   <div className="w-full flex items-start">
+   {loading ? (
+      <LoadingSpinner text="enrolling" />      
+   ) : (
     <button className="py-4 px-10  text-primary border border-primary font-teko tracking-widest hover:bg-primary hover:text-white transition-all">Enroll Class</button>
+   )}
+    
    </div>
      </form>
 

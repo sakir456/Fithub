@@ -6,21 +6,24 @@ import GoogleButton from 'react-google-button'
 import axios from "axios"
 import { AppContext } from '../context/AppContext'
 import { toast } from 'react-toastify'
+import PageLoader from '../components/PageLoader'
 
 const Login = () => {
 
-  const {backendUrl,token,setToken} = useContext(AppContext)
+  const {backendUrl,token,setToken, } = useContext(AppContext)
 
   const navigate = useNavigate();
   const [state, setState] =useState("Sign Up")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [name, setName] = useState("")
+  const [loading, setLoading] = useState(false)
 
   
 const onSubmitHandler = async(event)=> {
-     event.preventDefault();
+    event.preventDefault();
 
+     setLoading(true)
      try {
       if (state === "Sign Up"){
         const {data} = await axios.post(backendUrl + "/api/user/register", {name,password,email})
@@ -42,12 +45,16 @@ const onSubmitHandler = async(event)=> {
       }
      } catch (error) {
         toast.error(error.message)
-     }
+     }finally{
+      setLoading(false)
+  }
 
   }
 
 
   const responseGoogle = async(authResult) => {
+
+    setLoading(true)
        try {
     if(authResult['code']){
          const result = await googleAuth(authResult['code'])  
@@ -58,7 +65,9 @@ const onSubmitHandler = async(event)=> {
        }
          } catch (error) {
          console.log('Error while requesting google code :   ' ,error)
-     }
+     }finally{
+      setLoading(false)
+  }
   }
 
   const googleLogin = useGoogleLogin({
@@ -77,6 +86,9 @@ const onSubmitHandler = async(event)=> {
   },[token])
 
   return (
+    loading ? (
+      <PageLoader />
+    ) : (
     <div className="">
         <div>
         <div className="   w-full h-28 bg-[url('https://res.cloudinary.com/dkmnkggev/image/upload/v1740476246/hero2_mhw5ji.webp')] flex justify-center items-center ">
@@ -131,14 +143,10 @@ const onSubmitHandler = async(event)=> {
         </div>
     </div>
   )
+)
 }
 
 export default Login
 
 
 
-{/* <div>
-        <button
-         onClick={googleLogin}
-         className="py-2 px-4 bg-primary rounded border border-gray-100 text-white">Login With Google</button>
-        </div> */}
