@@ -4,9 +4,12 @@ import SectionHeader from "./SectionHeader";
 import axios from "axios";
 import { AppContext } from "../context/AppContext";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom"
 
 const Plans = () => {
   const { backendUrl, token } = useContext(AppContext);
+
+  const navigate = useNavigate()
 
   const initPay = (order) => {
     const options = {
@@ -41,7 +44,11 @@ const Plans = () => {
   };
 
   const paymentRazorPay = async (planType) => {
-    
+    if(!token){
+      toast.warn("Login to take Membership")
+      navigate("/login")
+      return
+    }
     try {
       const { data } = await axios.post(
         backendUrl + "/api/user/payment-razorpay",
