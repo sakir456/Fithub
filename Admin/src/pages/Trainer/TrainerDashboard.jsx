@@ -63,7 +63,7 @@ const TrainerDashboard = () => {
       <div className="pt-4 border border-t-0">
         {
           dashData.classes.map((item,index)=> (
-            <div key={index} className=" px-6 py-3  hover:bg-gray-300">
+            <div key={index} className=" px-6 py-3  hover:bg-gray-200">
               <div className="flex gap-3  items-center">
               <div className="flex-1 text-sm">
                 <p className=" font-medium text-gray-800">{item.className}</p>
